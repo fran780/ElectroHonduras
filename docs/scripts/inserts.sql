@@ -9,3 +9,36 @@ INSERT INTO `electronics_products` (`productId`, `productName`, `productDescript
 (8, 'Tablet Xiaomi Pad 6', 'Tablet con pantalla de 11\", procesador Snapdragon 870, 128GB de almacenamiento y batería de larga duración.', 7832.55, 'public/imagenes/Xiaomi_Pad.png', 9, 'ACT'),
 (9, 'Proyector Epson PowerLite X49', 'Proyector XGA con 3600 lúmenes, ideal para presentaciones y clases.', 10567.75, 'public/imagenes/Proyector.png', 6, 'ACT'),
 (10, 'Bocina JBL Charge 5', 'Altavoz portátil Bluetooth con sonido potente, batería de 20 horas y resistencia al agua.', 3672.76, 'public/imagenes/JBL.png', 0, 'ACT');
+
+
+INSERT INTO `roles` (`rolescod`, `rolesdsc`, `rolesest`) VALUES
+('ADMIN', 'Administrador', 'ACT'),
+('CLI', 'Cliente', 'ACT'),
+('ECI', 'Encargado de inventario', 'ACT');
+
+
+INSERT INTO roles_usuarios (usercod, rolescod, roleuserest, roleuserfch, roleuserexp) VALUES
+(1, 'ADMIN', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+(2, 'CLI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+(3, 'ECI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+(4, 'CLI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR));
+
+
+INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
+('Controllers\\Productos\\ProductosForm', 'Formulario de Productos', 'ACT', 'CTR'),
+('Controllers\\Productos\\ProductosList', 'Listado de Productos', 'ACT', 'CTR'),
+('Menu_Productos', 'Menu_Inventario_Productos', 'ACT', 'MNU'),
+('productos_DEL', 'Eliminar Productos', 'ACT', 'FNC'),
+('productos_DSP', 'Detalle de Productos', 'ACT', 'FNC'),
+('productos_INS', 'Agregar Productos', 'ACT', 'FNC'),
+('productos_UPD', 'Editar Productos', 'ACT', 'FNC');
+
+
+INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
+('ADMIN', 'Controllers\\Productos\\ProductosForm', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Productos\\ProductosList', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Menu_Productos', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_DEL', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_DSP', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_INS', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_UPD', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR));

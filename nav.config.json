@@ -26,6 +26,11 @@
       "id": "Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
+    },
+    {
+      "id": "Menu_Productos",
+      "nav_url": "index.php?page=Productos_ProductosList",
+      "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Inventario Productos"
     }
   ]
 }
