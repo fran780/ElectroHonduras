@@ -257,6 +257,3 @@ class Security extends \Dao\Table
     {
     }
 }
-
-
-?>
