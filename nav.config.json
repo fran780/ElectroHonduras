@@ -19,6 +19,11 @@
       "id": "Menu_BasicInfo",
       "nav_url": "index.php?page=BasicInfo",
       "nav_label": "<i class=\"fas fa-info-circle\"></i> Acerca de nosotros"
+    },
+    {
+      "id": "Menu_FAQ",
+      "nav_url": "index.php?page=Faq",
+      "nav_label": "<i class=\"fas fa-question-circle\"></i>&nbsp;Preguntas Frecuentes"
     }
   ],
   "private": [
@@ -26,6 +31,11 @@
       "id": "Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
+    },
+    {
+      "id": "Menu_TransHist",
+      "nav_url": "index.php?page=Checkout_History",
+      "nav_label": "<i class=\"fas fa-file-invoice-dollar\"></i>&nbsp;Histórico Transacciones"
     },
     {
       "id": "Menu_Productos",

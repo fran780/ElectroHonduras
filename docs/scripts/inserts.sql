@@ -53,3 +53,17 @@ INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
 ('ECI', 'Menu_Productos', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'productos_DSP', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'productos_UPD', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
+
+INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
+('Controllers\\Checkout\\History', 'Listado Historial de Transacciones', 'ACT', 'CTR'),
+('Controllers\\Checkout\\HistoryDetail', 'Formulario de Historial de Transacciones', 'ACT', 'CTR');
+
+INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
+('CLI', 'Controllers\\Checkout\\HistoryDetail', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('CLI', 'Controllers\\Checkout\\History', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
+
+INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
+('Menu_TransHist', 'Menu_Transacciones', 'ACT', 'MNU');
+
+INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
+('CLI', 'Menu_TransHist', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
