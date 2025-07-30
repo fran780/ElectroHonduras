@@ -30,13 +30,22 @@
       <ul>
         <li><a href="index.php?page={{PRIVATE_DEFAULT_CONTROLLER}}"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
         {{foreach NAVIGATION}}
-            <li><a href="{{nav_url}}">{{nav_label}}</a></li>
+        <li><a href="{{nav_url}}">{{nav_label}}</a></li>
         {{endfor NAVIGATION}}
         <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
       </ul>
     </nav>
     {{with login}}
-    <span class="username">{{userName}} <a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i></a></span>
+    <a href="index.php?page=Carretilla_Carretilla" class="cart-icon">
+      <i class="fa-solid fa-cart-shopping"></i>
+      {{if ~CART_ITEMS}}<span class="cart-count">{{~CART_ITEMS}}</span>{{endif ~CART_ITEMS}}
+    </a>
+    <span class="username">
+      {{userName}}
+      <a href="index.php?page=sec_logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </span>
     {{endwith login}}
   </header>
   <main>
@@ -49,4 +58,5 @@
   <script src="{{~BASE_DIR}}/{{this}}"></script>
   {{endfor EndScripts}}
 </body>
+
 </html>
