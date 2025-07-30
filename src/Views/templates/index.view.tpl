@@ -1,4 +1,4 @@
-<h1 style="text-align:center">{{SITE_TITLE}}</h1>
+<h1 style="text-align:center">ElectroHonduras</h1>
 
 <div class="product-list">
   {{foreach products}}

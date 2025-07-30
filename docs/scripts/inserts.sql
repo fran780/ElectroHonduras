@@ -25,57 +25,38 @@ INSERT INTO roles_usuarios (usercod, rolescod, roleuserest, roleuserfch, roleuse
 
 
 INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
+('Controllers\\Checkout\\Checkout', 'Acceso al Checkout para clientes', 'ACT', 'CTR'),
+('Controllers\\Checkout\\History', 'Listado Historial de Transacciones', 'ACT', 'CTR'),
+('Controllers\\Checkout\\HistoryDetail', 'Formulario de Historial de Transacciones', 'ACT', 'CTR'),
 ('Controllers\\Productos\\ProductosForm', 'Formulario de Productos', 'ACT', 'CTR'),
 ('Controllers\\Productos\\ProductosList', 'Listado de Productos', 'ACT', 'CTR'),
+('Controllers\\Usuarios\\Usuario', 'Formulario de Usuarios', 'ACT', 'CTR'),
+('Controllers\\Usuarios\\Usuarios', 'Listado de Usuarios', 'ACT', 'CTR'),
 ('Menu_Productos', 'Menu_Inventario_Productos', 'ACT', 'MNU'),
+('Menu_TransHist', 'Menu_Transacciones', 'ACT', 'MNU'),
+('Menu_Usuarios', 'Menu_Usuarios', 'ACT', 'MNU'),
 ('productos_DEL', 'Eliminar Productos', 'ACT', 'FNC'),
 ('productos_DSP', 'Detalle de Productos', 'ACT', 'FNC'),
 ('productos_INS', 'Agregar Productos', 'ACT', 'FNC'),
 ('productos_UPD', 'Editar Productos', 'ACT', 'FNC');
 
-INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
-('Controllers\\Checkout\\Checkout', 'Acceso al Checkout para clientes', 'ACT', 'CTR');
-
-
 INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
-('ADMIN', 'Controllers\\Productos\\ProductosForm', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'Controllers\\Productos\\ProductosList', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'Menu_Productos', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'productos_DEL', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'productos_DSP', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'productos_INS', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'productos_UPD', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR));
-
-INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
-('CLI', 'Controllers\\Checkout\\Checkout', 'ACT', DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Productos\\ProductosForm', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Productos\\ProductosList', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Usuarios\\Usuario', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Usuarios\\Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Menu_Productos', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Menu_Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_DEL', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_DSP', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_INS', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'productos_UPD', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('CLI', 'Controllers\\Checkout\\Checkout', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('CLI', 'Controllers\\Checkout\\History', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('CLI', 'Controllers\\Checkout\\HistoryDetail', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('CLI', 'Menu_TransHist', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'Controllers\\Productos\\ProductosForm', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'Controllers\\Productos\\ProductosList', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'Menu_Productos', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'productos_DSP', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 ('ECI', 'productos_UPD', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
-
-INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
-('Controllers\\Checkout\\History', 'Listado Historial de Transacciones', 'ACT', 'CTR'),
-('Controllers\\Checkout\\HistoryDetail', 'Formulario de Historial de Transacciones', 'ACT', 'CTR');
-
-INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
-('CLI', 'Controllers\\Checkout\\HistoryDetail', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('CLI', 'Controllers\\Checkout\\History', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
-
-INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
-('Menu_TransHist', 'Menu_Transacciones', 'ACT', 'MNU');
-
-INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
-('CLI', 'Menu_TransHist', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
-
-
-INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
-('Controllers\\Usuarios\\Usuario', 'Formulario de Usuarios', 'ACT', 'CTR'),
-('Controllers\\Usuarios\\Usuarios', 'Listado de Usuarios', 'ACT', 'CTR'),
-('Menu_Usuarios', 'Menu_Usuarios', 'ACT', 'MNU');
-
-
-INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
-('ADMIN', 'Controllers\\Usuarios\\Usuario', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'Controllers\\Usuarios\\Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
-('ADMIN', 'Menu_Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));

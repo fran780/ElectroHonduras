@@ -51,8 +51,9 @@
         </div>
         <div>
           <span><ion-icon name="mail"></ion-icon></span>
-          <a href="mailto:hpalacioseuceda@gmail.com">hpalacioseuceda@gmail.com</a>
+          <a href="mailto:fmfran7777@gmail.com">fmfran7777@gmail.com</a>
         </div>
+        &nbsp
         <div>
           <span><ion-icon name="call"></ion-icon></span>
           <a href="tel:+50496940930">+504 9694-0930</a>
