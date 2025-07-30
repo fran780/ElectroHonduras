@@ -67,3 +67,15 @@ INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
 
 INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
 ('CLI', 'Menu_TransHist', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));
+
+
+INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
+('Controllers\\Usuarios\\Usuario', 'Formulario de Usuarios', 'ACT', 'CTR'),
+('Controllers\\Usuarios\\Usuarios', 'Listado de Usuarios', 'ACT', 'CTR'),
+('Menu_Usuarios', 'Menu_Usuarios', 'ACT', 'MNU');
+
+
+INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
+('ADMIN', 'Controllers\\Usuarios\\Usuario', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Controllers\\Usuarios\\Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR)),
+('ADMIN', 'Menu_Usuarios', 'ACT',  DATE_ADD(NOW(), INTERVAL 1 YEAR));

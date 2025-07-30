@@ -41,6 +41,11 @@
       "id": "Menu_Productos",
       "nav_url": "index.php?page=Productos_ProductosList",
       "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Inventario Productos"
+    },
+    {
+      "id": "Menu_Usuarios",
+      "nav_url": "index.php?page=Usuarios_Usuarios",
+      "nav_label": "<i class=\"fas fa-users\"></i>&nbsp;Gestión Usuarios"
     }
   ]
 }
