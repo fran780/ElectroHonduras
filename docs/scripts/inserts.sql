@@ -10,19 +10,16 @@ INSERT INTO `electronics_products` (`productId`, `productName`, `productDescript
 (9, 'Proyector Epson PowerLite X49', 'Proyector XGA con 3600 lúmenes, ideal para presentaciones y clases.', 498.00, 'public/imagenes/Proyector.png', 6, 'ACT'),
 (10, 'Bocina JBL Charge 5', 'Altavoz portátil Bluetooth con sonido potente, batería de 20 horas y resistencia al agua.', 179.95, 'public/imagenes/JBL.png', 0, 'ACT');
 
-
 INSERT INTO `roles` (`rolescod`, `rolesdsc`, `rolesest`) VALUES
 ('ADMIN', 'Administrador', 'ACT'),
 ('CLI', 'Cliente', 'ACT'),
 ('ECI', 'Encargado de inventario', 'ACT');
-
 
 INSERT INTO roles_usuarios (usercod, rolescod, roleuserest, roleuserfch, roleuserexp) VALUES
 (1, 'ADMIN', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 (2, 'CLI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 (3, 'ECI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR)),
 (4, 'CLI', 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR));
-
 
 INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
 ('Controllers\\Checkout\\Checkout', 'Acceso al Checkout para clientes', 'ACT', 'CTR'),

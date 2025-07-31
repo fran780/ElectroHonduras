@@ -3,18 +3,15 @@
 namespace Utilities;
 
 use Dao\Security\Security as DaoSecurity;
-class Security {
-    private function __construct()
-    {
-        
-    }
-    private function __clone()
-    {
-        
-    }
+
+class Security
+{
+    private function __construct() {}
+    private function __clone() {}
     public static function logout()
     {
         unset($_SESSION["login"]);
+        \Utilities\Nav::invalidateNavData();
     }
     public static function login($userId, $userName, $userEmail)
     {
@@ -24,8 +21,10 @@ class Security {
             "userName" => $userName,
             "userEmail" => $userEmail
         );
+
+        \Utilities\Nav::invalidateNavData();
     }
-    public static function isLogged():bool
+    public static function isLogged(): bool
     {
         return isset($_SESSION["login"]) && $_SESSION["login"]["isLogged"];
     }
@@ -43,7 +42,7 @@ class Security {
         }
         return 0;
     }
-    public static function isAuthorized($userId, $function, $type = 'FNC'):bool
+    public static function isAuthorized($userId, $function, $type = 'FNC'): bool
     {
         if (\Utilities\Context::getContextByKey("DEVELOPMENT") == "1") {
             $functionInDb = DaoSecurity::getFeature($function);
@@ -53,7 +52,7 @@ class Security {
         }
         return DaoSecurity::getFeatureByUsuario($userId, $function);
     }
-    public static function isInRol($userId, $rol):bool
+    public static function isInRol($userId, $rol): bool
     {
         if (\Utilities\Context::getContextByKey("DEVELOPMENT") == "1") {
             $rolInDb = DaoSecurity::getRol($rol);
@@ -62,5 +61,16 @@ class Security {
             }
         }
         return DaoSecurity::isUsuarioInRol($userId, $rol);
+    }
+
+    public static function isAdminOrEci($userId = null): bool
+    {
+        if ($userId === null) {
+            $userId = self::getUserId();
+        }
+        if (!$userId) {
+            return false;
+        }
+        return self::isInRol($userId, 'ADMIN') || self::isInRol($userId, 'ECI');
     }
 }

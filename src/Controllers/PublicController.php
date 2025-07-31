@@ -42,12 +42,17 @@ abstract class PublicController implements IController
                 \Utilities\Nav::setNavContext();
             }
         }
+        $showCart = true;
+        if (\Utilities\Security::isLogged()) {
+            $showCart = !\Utilities\Security::isAdminOrEci();
+        }
+        \Utilities\Context::setContext("SHOW_CART", $showCart);
         $this->getCartCounter();
     }
     /**
      * Return name of instantiated class
      *
-     * @return string
+     * return string
      */
     public function toString(): string
     {

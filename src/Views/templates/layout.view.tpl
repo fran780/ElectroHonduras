@@ -34,10 +34,12 @@
         {{endfor PUBLIC_NAVIGATION}}
       </ul>
     </nav>
+    {{if ~SHOW_CART}}
     <a href="index.php?page=Carretilla_Carretilla" class="cart-icon">
       <i class="fa-solid fa-cart-shopping"></i>
       {{if ~CART_ITEMS}}<span class="cart-count">{{~CART_ITEMS}}</span>{{endif ~CART_ITEMS}}
     </a>
+    {{endif ~SHOW_CART}}
   </header>
   <main>
     {{{page_content}}}
@@ -46,7 +48,7 @@
     <div>Todo los Derechos Reservados {{~CURRENT_YEAR}} &copy;</div>
   </footer>
   {{foreach EndScripts}}
-  <script src="{{~BASE_DIR}}/{{this}}"></script>
+  <script src="/{{~BASE_DIR}}/{{this}}"></script>
   {{endfor EndScripts}}
 </body>
 

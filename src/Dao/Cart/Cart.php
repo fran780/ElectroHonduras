@@ -203,4 +203,9 @@ class Cart extends \Dao\Table
         $deleteSql = "DELETE FROM carretilla WHERE usercod = :usercod;";
         self::executeNonQuery($deleteSql, ["usercod" => $usercod]);
     }
+    public static function clearAnonCart(string $anonCod)
+    {
+        $deleteSql = "DELETE FROM carretillaanon WHERE anoncod = :anoncod;";
+        self::executeNonQuery($deleteSql, ["anoncod" => $anonCod]);
+    }
 }

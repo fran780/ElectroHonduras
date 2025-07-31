@@ -40,16 +40,18 @@ class Index extends PublicController
 
         if ($this->isPostBack()) {
             if (Security::isLogged()) {
-                $usercod = Security::getUserId();
-                $productId = intval($_POST["productId"]);
-                $product = Cart::getProductoDisponible($productId);
-                if ($product["productStock"] - 1 >= 0) {
-                    Cart::addToAuthCart(
-                        intval($_POST["productId"]),
-                        $usercod,
-                        1,
-                        $product["productPrice"]
-                    );
+                if (!Security::isAdminOrEci()) {
+                    $usercod = Security::getUserId();
+                    $productId = intval($_POST["productId"]);
+                    $product = Cart::getProductoDisponible($productId);
+                    if ($product["productStock"] - 1 >= 0) {
+                        Cart::addToAuthCart(
+                            intval($_POST["productId"]),
+                            $usercod,
+                            1,
+                            $product["productPrice"]
+                        );
+                    }
                 }
             } else {
                 $cartAnonCod = CartFns::getAnnonCartCode();
@@ -68,6 +70,8 @@ class Index extends PublicController
                 }
             }
             $this->getCartCounter();
+            Site::redirectTo("index.php?page=Index");
+            return;
         }
 
         $products = Cart::getProductosDisponibles();
