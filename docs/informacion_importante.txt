@@ -1,0 +1,1 @@
+Buenas ingeniero para poder ver el carrito de compras y todos los iconos utilizados debera poner el siguiente código en el FONT_AWESOME_KIT: efa23f9d8a
