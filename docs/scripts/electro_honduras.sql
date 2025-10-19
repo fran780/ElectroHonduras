@@ -10,7 +10,7 @@ CREATE TABLE
         `userest` char(3) DEFAULT NULL,
         `useractcod` varchar(128) DEFAULT NULL,
         `userpswdchg` varchar(128) DEFAULT NULL,
-        `usertipo` char(3) DEFAULT NULL COMMENT 'Tipo de Usuario, Normal, Consultor o Cliente',
+        `usertipo` char(3) DEFAULT NULL,
         PRIMARY KEY (`usercod`),
         UNIQUE KEY `useremail_UNIQUE` (`useremail`),
         KEY `usertipo` (
@@ -63,14 +63,54 @@ CREATE TABLE
         CONSTRAINT `rol_funcion_key` FOREIGN KEY (`fncod`) REFERENCES `funciones` (`fncod`) ON DELETE NO ACTION ON UPDATE NO ACTION
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
+
 CREATE TABLE
-    `bitacora` (
-        `bitacoracod` int(11) NOT NULL AUTO_INCREMENT,
-        `bitacorafch` datetime DEFAULT NULL,
-        `bitprograma` varchar(255) DEFAULT NULL,
-        `bitdescripcion` varchar(255) DEFAULT NULL,
-        `bitobservacion` mediumtext,
-        `bitTipo` char(3) DEFAULT NULL,
-        `bitusuario` bigint(18) DEFAULT NULL,
-        PRIMARY KEY (`bitacoracod`)
-    ) ENGINE = InnoDB AUTO_INCREMENT = 10 DEFAULT CHARSET = utf8;
+    `carretilla` (
+        `usercod` BIGINT(10) NOT NULL,
+        `productId` int(11) NOT NULL,
+        `crrctd` INT(5) NOT NULL,
+        `crrprc` DECIMAL(12, 2) NOT NULL,
+        `crrfching` DATETIME NOT NULL,
+        PRIMARY KEY (`usercod`, `productId`),
+        INDEX `productId_idx` (`productId` ASC),
+        CONSTRAINT `carretilla_user_key` FOREIGN KEY (`usercod`) REFERENCES `usuario` (`usercod`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+        CONSTRAINT `carretilla_prd_key` FOREIGN KEY (`productId`) REFERENCES `electronics_products` (`productId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    );
+
+CREATE TABLE
+    `carretillaanon` (
+        `anoncod` varchar(128) NOT NULL,
+        `productId` int(11) NOT NULL,
+        `crrctd` int(5) NOT NULL,
+        `crrprc` decimal(12, 2) NOT NULL,
+        `crrfching` datetime NOT NULL,
+        PRIMARY KEY (`anoncod`, `productId`),
+        INDEX `productId_idx` (`productId` ASC),
+        CONSTRAINT `carretillaanon_prd_key` FOREIGN KEY (`productId`) REFERENCES `electronics_products` (`productId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    );
+
+CREATE TABLE
+    `electronics_products` (
+        `productId` int(11) NOT NULL AUTO_INCREMENT,
+        `productName` varchar(255) NOT NULL,
+        `productDescription` text NOT NULL,
+        `productPrice` decimal(10, 2) NOT NULL,
+        `productImgUrl` varchar(255) NOT NULL,
+        `productStock` int(11) NOT NULL DEFAULT 0,
+        `productStatus` char(3) NOT NULL,
+        PRIMARY KEY (`productId`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4;
+
+    CREATE TABLE `transactions` (
+    `transactionId` INT NOT NULL AUTO_INCREMENT,
+    `usercod` BIGINT(10) NOT NULL,
+    `orderid` VARCHAR(128) NOT NULL,
+    `transdate` DATETIME NOT NULL,
+    `transstatus` VARCHAR(45) NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
+    `currency` VARCHAR(5) NOT NULL,
+    `orderjson` JSON NOT NULL,
+    PRIMARY KEY (`transactionId`),
+    KEY `fk_transactions_user_idx` (`usercod`),
+    CONSTRAINT `fk_transactions_user` FOREIGN KEY (`usercod`) REFERENCES `usuario`(`usercod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
