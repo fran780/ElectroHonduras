@@ -10,7 +10,8 @@
  * @link     http://
  */
 namespace Controllers;
-
+use Dao\Cart\Cart;
+use Utilities\Site;
 /**
  * Index Controller
  *
@@ -29,7 +30,11 @@ class Index extends PublicController
      */
     public function run() :void
     {
-        $viewData = array();
+       Site::addLink("public/css/products.css");
+       $products = Cart::getProductosDisponibles();
+        $viewData = [
+            "products" => $products,
+        ];
         \Views\Renderer::render("index", $viewData);
     }
 }

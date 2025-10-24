@@ -4,9 +4,9 @@ namespace Dao\Cart;
 
 class Cart extends \Dao\Table
 {
-    public static function getProductosDisponibles()
+     public static function getProductosDisponibles()
     {
-        $sqlAllProductosActivos = "SELECT * from products where productStatus in ('ACT');";
+        $sqlAllProductosActivos = "SELECT * from  electronics_products where productStatus in ('ACT');";
         $productosDisponibles = self::obtenerRegistros($sqlAllProductosActivos, array());
 
         //Sacar el stock de productos con carretilla autorizada
@@ -21,7 +21,7 @@ class Cart extends \Dao\Table
         //Sacar el stock de productos con carretilla no autorizada
         $deltaNAutorizada = \Utilities\Cart\CartFns::getUnAuthTimeDelta();
         $sqlCarretillaNAutorizada = "select productId, sum(crrctd) as reserved
-            from carretillaanom where TIME_TO_SEC(TIMEDIFF(now(), crrfching)) <= :delta
+            from carretillaanon where TIME_TO_SEC(TIMEDIFF(now(), crrfching)) <= :delta
             group by productId;";
         $prodsCarretillaNAutorizada = self::obtenerRegistros(
             $sqlCarretillaNAutorizada,
@@ -51,7 +51,7 @@ class Cart extends \Dao\Table
 
     public static function getProductoDisponible($productId)
     {
-        $sqlAllProductosActivos = "SELECT * from products where productStatus in ('ACT') and productId=:productId;";
+        $sqlAllProductosActivos = "SELECT * from electronic_products where productStatus in ('ACT') and productId=:productId;";
         $productosDisponibles = self::obtenerRegistros($sqlAllProductosActivos, array("productId" => $productId));
 
         //Sacar el stock de productos con carretilla autorizada
