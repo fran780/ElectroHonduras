@@ -1,0 +1,45 @@
+.faq {
+  padding: 1rem;
+}
+
+.acordeon-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.acordeon-encabezado {
+  background-color: #f7f7f7;
+  color: #333;
+  cursor: pointer;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.acordeon-encabezado .flecha {
+  display: inline-block;
+  width: 0; 
+  height: 0; 
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.acordeon-item.activo .flecha {
+  transform: rotate(90deg);
+}
+
+.acordeon-contenido {
+  display: none;
+  padding: 0 1rem 1rem;
+}
+
+.acordeon-item.activo .acordeon-contenido {
+  display: block;
+}

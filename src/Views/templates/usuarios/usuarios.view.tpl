@@ -1,4 +1,4 @@
-<h1>Trabajar con Usuarios</h1>
+<h1>Gestión de Usuarios</h1>
 <section class="grid">
     <div class="row">
         <form class="col-12 col-m-8" action="index.php" method="get">

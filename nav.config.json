@@ -24,6 +24,11 @@
       "id": "Menu_Contactos",
       "nav_url": "index.php?page=Contactos_Contactos",
       "nav_label": "<i class=\"fas fa-map-marker-alt\"></i>&nbsp;Contáctanos"
+    },
+    {
+      "id": "Menu_FAQ",
+      "nav_url": "index.php?page=Faq",
+      "nav_label": "<i class=\"fas fa-question-circle\"></i>&nbsp;Preguntas Frecuentes"
     }
   ],
   "private": [
