@@ -19,8 +19,12 @@
       "id": "Menu_Usuarios",
       "nav_url": "index.php?page=Usuarios_Usuarios",
       "nav_label": "<i class=\"fas fa-users\"></i>&nbsp;Gestión Usuarios"
+    },
+    {
+      "id": "Menu_Contactos",
+      "nav_url": "index.php?page=Contactos_Contactos",
+      "nav_label": "<i class=\"fas fa-map-marker-alt\"></i>&nbsp;Contáctanos"
     }
-
   ],
   "private": [
     {

@@ -18,6 +18,11 @@ class Validators {
         return preg_match("/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,32}$/", $valor) && true;
     }
 
+     static public function IsValidHonduranCelPhone($valor)
+    {
+        return preg_match("/^\+?\(?(504)?\)?\s?[389]\d{3}[\-\s]?\d{4}$/", $valor) && true;
+    }
+
     private function __construct()
     {
         
