@@ -1,0 +1,44 @@
+Bitácora técnica 
+
+1. Sprint 4 - Scrum Master: Ana Zelaya
+Durante este sprint se estableció la base técnica del sistema ElectroHonduras, el objetivo principal fue instalar y configurar el framework MVC, crear la base de datos del sistema, y verificar que todos los entornos locales funcionaran correctamente, garantizando que cada integrante del equipo pudiera trabajar con la misma estructura.
+
+1.1. Desarrollo de tareas del Sprint 4
+
+1.1.1. Instalación del Framework y Verificación de Pantallas (13–16 de octubre)
+Esta tarea fue grupal y requerida para todos los miembros del equipo, ya que cada uno debía tener su entorno de desarrollo completamente funcional antes de avanzar con los módulos específicos. El proceso comenzó con la descarga del framework MVC propuesto para el proyecto, seguido de su instalación y configuración dentro del entorno local de cada integrante. Se verificaron las rutas, dependencias y el correcto enlace con el servidor local XAMPP.
+Ana Zelaya, como Scrum Master, verificó la correcta instalación en cada equipo y marcó el checklist de finalización en Trello, confirmando que todos los entornos estuvieran sincronizados.
+
+1.1.2. Creación de la Base de Datos (16–18 de octubre)
+Esta tarea fue desarrollada por Francisco Fernández, quien se encargó de levantar la base de datos del sistema de acuerdo con el diccionario de datos establecido. El trabajo consistió en definir las tablas principales, relaciones entre entidades, llaves primarias y foráneas, y establecer la conexión con el entorno local. 
+
+2. Sprint 5 - Scrum Master: Francisco Fernández
+Durante el Sprint 5, el equipo se enfocó en establecer la base funcional del sistema, conectando la interfaz con la base de datos y configurando los primeros módulos operativos. El objetivo principal fue lograr que el sistema pudiera mostrar productos activos en la página principal, gestionar la carga de datos iniciales y permitir el registro automático de usuarios dentro de la base de datos, garantizando la coherencia entre frontend y backend.
+
+2.1. Desarrollo de tareas del Sprint 5 
+
+2.1.1. Cargar datos iniciales a la base de datos (Usuarios y Productos) – 20 al 21 de octubre
+Esta tarea consistió en preparar la base de datos con la información necesaria para probar el funcionamiento del sistema y realizar las primeras pruebas visuales. Klardy Cruz se encargó de insertar los roles base del sistema (Administrador, Encargado de Inventario y Cliente), así como de crear usuarios de prueba asociados a cada rol. Además, se insertaron los productos activos con sus imágenes, precios y niveles de stock, permitiendo validar el correcto despliegue en la interfaz.
+
+2.1.2. Catálogo en la Página Principal (Visualización de Productos) – 22 al 24 de octubre
+Esta tarea le toco a Ana Zelaya, donde configuró la página principal (index) para mostrar automáticamente los productos registrados en la base de datos. Conectó el frontend al backend y diseñó las tarjetas de producto que despliegan nombre, imagen, precio y disponibilidad. Validó que solo los productos activos se mostraran al cliente.
+
+2.1.3. Configurar módulo de registro de usuarios (registro de usuarios) – 22 al 25 de octubre
+Héctor Palacios conectó el formulario de registro a la base de datos, implementando la asignación automática del rol “Cliente” en la tabla roles_usuarios. El proceso se probó con distintos escenarios para garantizar que la inserción y validación funcionaran correctamente.
+
+3. Sprint 6 - Scrum Master: Francisco Fernández
+El objetivo de este sprint es continuar con el desarrollo y avance de los módulos principales del sistema ElectroHonduras, consolidando la estructura administrativa y funcional del proyecto. Durante esta etapa, el equipo está enfocado en la implementación de los módulos de Gestión de Productos, Gestión de Usuarios y Carretilla de Compras, además de preparar la estructura base para los módulos informativos de Contacto, Acerca de Nosotros y Preguntas Frecuentes (FAQ). 
+
+3.1. Desarrollo de tareas del Sprint 6
+
+3.1.1. Módulo de Gestión de Productos (Administrador) – 27 al 29 de octubre
+Guillermo Ortega completó el módulo de gestión de productos, que permite a los administradores agregar, editar y eliminar productos del sistema. Este módulo se integró con la base de datos y se sincronizó con la visualización en el catálogo principal. También se validaron los campos requeridos para garantizar la integridad de la información.
+
+3.1.2. Módulo de Gestión de Usuarios (Administrador) – 27 al 29 de octubre
+Héctor Palacios desarrolló el módulo de gestión de usuarios, que permite visualizar, editar y actualizar información de los usuarios registrados, así como administrar sus roles y estados. El módulo se diseñó para integrarse con el panel administrativo, mostrando una tabla con los datos básicos de los usuarios y permitiendo acciones rápidas de edición o desactivación.
+
+3.1.3 Módulo de Contacto – 30 de octubre al 1 de noviembre
+Klardy Cruz desarrolló el módulo de contacto, permitiendo que los usuarios puedan enviar consultas o mensajes a la tienda de forma sencilla. Incluyó validaciones para asegurar que todos los campos fueran obligatorios y que el número de teléfono ingresado fuera hondureño, fortaleciendo la confiabilidad del formulario.
+
+3.1.4 Módulo de Preguntas Frecuentes (FAQ) – 30 de octubre al 1 de noviembre
+Klardy Cruz también diseñó la sección de preguntas frecuentes, donde los usuarios pueden encontrar respuestas rápidas a las dudas más comunes. Se crearon las vistas, preguntas iniciales, validaciones de accesibilidad y pruebas de funcionamiento en distintos dispositivos.
