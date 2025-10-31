@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Version 7.2
  *
@@ -9,18 +10,13 @@
  * @version  CVS:1.0.0
  * @link     http://
  */
+
 namespace Controllers;
+
 use Dao\Cart\Cart;
 use Utilities\Site;
-/**
- * Index Controller
- *
- * @category Public
- * @package  Controllers
- * @author   Orlando J Betancourth <orlando.betancourth@gmail.com>
- * @license  MIT http://
- * @link     http://
- */
+use Utilities\Cart\CartFns;
+
 class Index extends PublicController
 {
     /**
@@ -28,14 +24,37 @@ class Index extends PublicController
      *
      * @return void
      */
-    public function run() :void
+    public function run(): void
     {
-       Site::addLink("public/css/products.css");
-       $products = Cart::getProductosDisponibles();
+        Site::addLink("public/css/products.css");
+
+        if ($this->isPostBack()) {
+            // Modo público: solo carretilla anónima
+            $cartAnonCod = CartFns::getAnnonCartCode();
+
+            if (isset($_POST["addToCart"])) {
+                $productId = intval($_POST["productId"]);
+                $product = Cart::getProductoDisponible($productId);
+
+                if ($product && ($product["productStock"] - 1) >= 0) {
+                    Cart::addToAnonCart(
+                        $productId,
+                        $cartAnonCod,
+                        1,
+                        $product["productPrice"]
+                    );
+                }
+            }
+
+            $this->getCartCounter();
+            Site::redirectTo("index.php?page=Index");
+            return;
+        }
+
+        $products = Cart::getProductosDisponibles();
         $viewData = [
             "products" => $products,
         ];
         \Views\Renderer::render("index", $viewData);
     }
 }
-?>
