@@ -3,12 +3,12 @@
     {
       "id": "Menu_SignIn",
       "nav_url": "index.php?page=Sec_Login",
-      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Iniciar Sesión"
+      "nav_label": "<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Iniciar Sesión"
     },
-     {
+    {
       "id": "Menu_SignUp",
       "nav_url": "index.php?page=Sec_Register",
-      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Crear Cuenta"
+      "nav_label": "<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Crear Cuenta"
     },
     {
       "id": "Menu_Productos",
@@ -29,11 +29,16 @@
       "id": "Menu_FAQ",
       "nav_url": "index.php?page=Faq",
       "nav_label": "<i class=\"fas fa-question-circle\"></i>&nbsp;Preguntas Frecuentes"
+    },
+    {
+      "id": "Menu_BasicInfo",
+      "nav_url": "index.php?page=BasicInfo",
+      "nav_label": "<i class=\"fas fa-info-circle\"></i> Acerca de nosotros"
     }
   ],
   "private": [
     {
-      "id":"Menu_PaymentCheckout",
+      "id": "Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
     }
