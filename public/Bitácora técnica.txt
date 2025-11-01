@@ -42,3 +42,12 @@ Klardy Cruz desarrolló el módulo de contacto, permitiendo que los usuarios pue
 
 3.1.4 Módulo de Preguntas Frecuentes (FAQ) – 30 de octubre al 1 de noviembre
 Klardy Cruz también diseñó la sección de preguntas frecuentes, donde los usuarios pueden encontrar respuestas rápidas a las dudas más comunes. Se crearon las vistas, preguntas iniciales, validaciones de accesibilidad y pruebas de funcionamiento en distintos dispositivos.
+
+3.1.5. Módulo de Carretilla de Compras – 27 al 31 de octubre
+Francisco Fernández fue responsable del desarrollo del módulo de carretilla de compras, el cual permite a los clientes agregar, eliminar o modificar productos antes de confirmar su pedido.
+Este módulo incluye botones dinámicos para aumentar o disminuir cantidades, el cálculo automático del subtotal y total según los productos seleccionados, y la validación para que el carrito mantenga los artículos almacenados hasta el proceso de compra.
+También se añadió un ícono interactivo en la página principal que refleja en tiempo real los productos agregados, mejorando la experiencia del usuario durante el proceso de compra.
+
+3.1.6. Módulo de Acerca de Nosotros – 30 de octubre al 1 de noviembre
+Ana Zelaya desarrolló el módulo informativo Acerca de Nosotros, el cual presenta la historia, misión, visión y valores de la tienda, con el objetivo de fortalecer la identidad institucional del negocio y generar confianza en los clientes.
+Se diseñó una interfaz visual agradable que facilita la lectura del contenido, validando su accesibilidad desde el menú principal y revisando el formato general para garantizar coherencia visual con el resto del sistema.
