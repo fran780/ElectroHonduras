@@ -11,6 +11,28 @@
       "nav_label": "<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Crear Cuenta"
     },
     {
+      "id": "Menu_Contactos",
+      "nav_url": "index.php?page=Contactos_Contactos",
+      "nav_label": "<i class=\"fas fa-map-marker-alt\"></i>&nbsp;Contáctanos"
+    },
+    {
+      "id": "Menu_BasicInfo",
+      "nav_url": "index.php?page=BasicInfo",
+      "nav_label": "<i class=\"fas fa-info-circle\"></i> Acerca de nosotros"
+    },
+    {
+      "id": "Menu_FAQ",
+      "nav_url": "index.php?page=Faq",
+      "nav_label": "<i class=\"fas fa-question-circle\"></i>&nbsp;Preguntas Frecuentes"
+    }
+  ],
+  "private": [
+    {
+      "id": "Menu_PaymentCheckout",
+      "nav_url": "index.php?page=Checkout_Checkout",
+      "nav_label": "Carretilla de Compra"
+    },
+    {
       "id": "Menu_Productos",
       "nav_url": "index.php?page=Productos_ProductosList",
       "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Inventario Productos"
@@ -19,28 +41,6 @@
       "id": "Menu_Usuarios",
       "nav_url": "index.php?page=Usuarios_Usuarios",
       "nav_label": "<i class=\"fas fa-users\"></i>&nbsp;Gestión Usuarios"
-    },
-    {
-      "id": "Menu_Contactos",
-      "nav_url": "index.php?page=Contactos_Contactos",
-      "nav_label": "<i class=\"fas fa-map-marker-alt\"></i>&nbsp;Contáctanos"
-    },
-    {
-      "id": "Menu_FAQ",
-      "nav_url": "index.php?page=Faq",
-      "nav_label": "<i class=\"fas fa-question-circle\"></i>&nbsp;Preguntas Frecuentes"
-    },
-    {
-      "id": "Menu_BasicInfo",
-      "nav_url": "index.php?page=BasicInfo",
-      "nav_label": "<i class=\"fas fa-info-circle\"></i> Acerca de nosotros"
-    }
-  ],
-  "private": [
-    {
-      "id": "Menu_PaymentCheckout",
-      "nav_url": "index.php?page=Checkout_Checkout",
-      "nav_label": "Carretilla de Compra"
     }
   ]
 }

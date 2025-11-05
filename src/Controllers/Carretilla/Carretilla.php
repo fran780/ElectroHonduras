@@ -17,6 +17,10 @@ class Carretilla extends PublicController
 
         $userIsLogged = Security::isLogged();
         $userId = $userIsLogged ? Security::getUserId() : CartFns::getAnnonCartCode();
+
+        if ($userIsLogged && Security::isAdminOrEci($userId)) {
+            Site::redirectTo("index.php");
+        }
         
         $carretilla = $userIsLogged
             ? Cart::getAuthCart($userId)

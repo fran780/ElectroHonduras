@@ -2,13 +2,13 @@
 
 namespace Controllers\Productos;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Dao\Productos\Productos as DaoProductos;
 use Utilities\Site;
 use Utilities\Validators;
 use Views\Renderer;
 
-class ProductosForm extends PublicController
+class ProductosForm extends PrivateController
 {
     private $mode = "DSP";
     private $producto = [
@@ -52,6 +52,9 @@ class ProductosForm extends PublicController
         $this->mode = $_GET["mode"] ?? "NOF";
         if (!isset($this->modeDescriptions[$this->mode])) {
             throw new \Exception("Modo inválido", 1);
+        }
+          if (!$this->isFeatureAutorized("productos_" . $this->mode)) {
+            throw new \Exception("No tiene permisos para realizar esta acción.", 1);
         }
 
         $this->readonly = $this->mode === "DEL" ? "readonly" : "";

@@ -2,13 +2,13 @@
 
 namespace Controllers\Usuarios;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Views\Renderer;
 use Dao\Usuarios\Usuarios as UsuariosDao;
 use Utilities\Site;
 use Utilities\Validators;
 
-class Usuario extends PublicController
+class Usuario extends PrivateController
 {
     private $viewData = [];
     private $mode = "DSP";

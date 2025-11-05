@@ -2,13 +2,13 @@
 
 namespace Controllers\Productos;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Dao\Productos\Productos as DaoProductos;
 use Utilities\Context;
 use Utilities\Paging;
 use Views\Renderer;
 
-class ProductosList extends PublicController
+class ProductosList extends PrivateController
 {
     private $partialName = "";
     private $status = "";
@@ -18,6 +18,11 @@ class ProductosList extends PublicController
     private $total = 0;
     private $pages = 0;
     private $viewData = [];
+
+    private $product_DSP = false;
+    private $product_UPD = false;
+    private $product_DEL = false;
+    private $product_INS = false;
 
     public function run(): void
     {
@@ -79,6 +84,10 @@ class ProductosList extends PublicController
             $this->itemsPerPage = 10;
         }
 
+        $this->product_DSP = $this->isFeatureAutorized("productos_DSP");
+        $this->product_UPD = $this->isFeatureAutorized("productos_UPD");
+        $this->product_DEL = $this->isFeatureAutorized("productos_DEL");
+        $this->product_INS = $this->isFeatureAutorized("productos_INS");
     }
 
     private function setParamsToContext(): void
@@ -96,6 +105,11 @@ class ProductosList extends PublicController
         $this->viewData["pageNum"] = $this->pageNumber;
         $this->viewData["itemsPerPage"] = $this->itemsPerPage;
         $this->viewData["productos"] = $this->productos;
+
+        $this->viewData["product_DSP"] = $this->product_DSP;
+        $this->viewData["product_UPD"] = $this->product_UPD;
+        $this->viewData["product_DEL"] = $this->product_DEL;
+        $this->viewData["product_INS"] = $this->product_INS;
 
         $statusKey = "status_" . ($this->status === "" ? "EMP" : $this->status);
         $this->viewData[$statusKey] = "selected";

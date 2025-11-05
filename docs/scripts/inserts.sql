@@ -31,3 +31,36 @@ INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
 
 INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
 ('CLI', 'Controllers\\Checkout\\Checkout', 'ACT', '2026-11-04');
+
+/*funciones para que cada usuarios acceda a sus modulos correspondientes*/
+
+INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
+('ADMIN', 'Controllers\\Productos\\ProductosForm', 'ACT', '2026-11-04'),
+('ADMIN', 'Controllers\\Productos\\ProductosList', 'ACT', '2026-11-04'),
+('ADMIN', 'Controllers\\Usuarios\\Usuario', 'ACT', '2026-11-04'),
+('ADMIN', 'Controllers\\Usuarios\\Usuarios', 'ACT', '2026-11-04'),
+('ADMIN', 'Menu_Productos', 'ACT', '2026-11-04'),
+('ADMIN', 'Menu_Usuarios', 'ACT', '2026-11-04'),
+('ADMIN', 'productos_DEL', 'ACT', '2026-11-04'),
+('ADMIN', 'productos_DSP', 'ACT', '2026-11-04'),
+('ADMIN', 'productos_INS', 'ACT', '2026-11-04'),
+('ADMIN', 'productos_UPD', 'ACT', '2026-11-04'),
+('ECI', 'Controllers\\Productos\\ProductosForm', 'ACT', '2026-11-04'),
+('ECI', 'Controllers\\Productos\\ProductosList', 'ACT', '2026-11-04'),
+('ECI', 'Menu_Productos', 'ACT', '2026-11-04'),
+('ECI', 'productos_DSP', 'ACT', '2026-11-04'),
+('ECI', 'productos_UPD', 'ACT', '2026-11-04');
+
+INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
+('Controllers\\Productos\\ProductosForm', 'Formulario de Productos', 'ACT', 'CTR'),
+('Controllers\\Productos\\ProductosList', 'Listado de Productos', 'ACT', 'CTR'),
+('Controllers\\Usuarios\\Usuario', 'Formulario de Usuarios', 'ACT', 'CTR'),
+('Controllers\\Usuarios\\Usuarios', 'Listado de Usuarios', 'ACT', 'CTR'),
+('Menu_PaymentCheckout', 'Menu_PaymentCheckout', 'ACT', 'MNU'),
+('Menu_Productos', 'Menu_Inventario_Productos', 'ACT', 'MNU'),
+('Menu_TransHist', 'Menu_TransHist', 'ACT', 'MNU'),
+('Menu_Usuarios', 'Menu_Usuarios', 'ACT', 'MNU'),
+('productos_DEL', 'Eliminar Productos', 'ACT', 'FNC'),
+('productos_DSP', 'Detalle de Productos', 'ACT', 'FNC'),
+('productos_INS', 'Agregar Productos', 'ACT', 'FNC'),
+('productos_UPD', 'Editar Productos', 'ACT', 'FNC');

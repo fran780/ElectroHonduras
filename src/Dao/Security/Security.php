@@ -32,7 +32,7 @@ class Security extends \Dao\Table
         if ($filter == "" && $page == -1 && $items == 0) {
             $sqlstr = "SELECT * FROM usuario;";
         } else {
-            //TODO: Terminar consultas FACET
+
             if ($page = -1 and $items = 0) {
                 $sqlstr = sprintf("SELECT * FROM usuarios %s;", $filter);
             } else {
@@ -58,7 +58,6 @@ class Security extends \Dao\Table
         }
 
         $newUser = self::_usuarioStruct();
-        //Tratamiento de la Contraseña
         $hashedPassword = self::_hashPassword($password);
 
         unset($newUser["usercod"]);
@@ -66,7 +65,7 @@ class Security extends \Dao\Table
         unset($newUser["userpswdchg"]);
 
         $newUser["useremail"] = $email;
-        $newUser["username"] = "John Doe";
+        $newUser["username"] = "";
         $newUser["userpswd"] = $hashedPassword;
         $newUser["userpswdest"] = Estados::ACTIVO;
         $newUser["userpswdexp"] = date('Y-m-d', time() + 7776000);  //(3*30*24*60*60) (m d h mi s)
@@ -74,9 +73,9 @@ class Security extends \Dao\Table
         $newUser["useractcod"] = hash("sha256", $email . time());
         $newUser["usertipo"] = UsuarioTipo::PUBLICO;
 
-        $sqlIns = "INSERT INTO `usuario` (`useremail`, `username`, `userpswd`,
-            `userfching`, `userpswdest`, `userpswdexp`, `userest`, `useractcod`,
-            `userpswdchg`, `usertipo`)
+        $sqlIns = "INSERT INTO usuario (useremail, username, userpswd,
+            userfching, userpswdest, userpswdexp, userest, useractcod,
+            userpswdchg, usertipo)
             VALUES
             ( :useremail, :username, :userpswd,
             now(), :userpswdest, :userpswdexp, :userest, :useractcod,
@@ -95,7 +94,7 @@ class Security extends \Dao\Table
 
     static public function getUsuarioByEmail($email)
     {
-        $sqlstr = "SELECT * from `usuario` where `useremail` = :useremail ;";
+        $sqlstr = "SELECT * from usuario where useremail = :useremail ;";
         $params = array("useremail" => $email);
 
         return self::obtenerUnRegistro($sqlstr, $params);
@@ -150,7 +149,7 @@ class Security extends \Dao\Table
 
     static public function addNewFeature($fncod, $fndsc, $fnest, $fntyp)
     {
-        $sqlins = "INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`)
+        $sqlins = "INSERT INTO funciones (fncod, fndsc, fnest, fntyp)
             VALUES (:fncod , :fndsc , :fnest , :fntyp );";
 
         return self::executeNonQuery(
@@ -189,7 +188,7 @@ class Security extends \Dao\Table
 
     static public function addRolToUsuario($userCod, $rolescod, $estado = Estados::ACTIVO)
     {
-        $sqlins = "INSERT INTO `roles_usuarios` (`usercod`, `rolescod`, `roleuserest`, `roleuserfch`, `roleuserexp`)
+        $sqlins = "INSERT INTO roles_usuarios (usercod, rolescod, roleuserest, roleuserfch, roleuserexp)
             VALUES (:usercod, :rolescod, :roleuserest, now(), DATE_ADD(now(), INTERVAL 1 YEAR));";
 
         return self::executeNonQuery(
@@ -198,6 +197,21 @@ class Security extends \Dao\Table
                 'usercod' => $userCod,
                 'rolescod' => $rolescod,
                 'roleuserest' => $estado
+            )
+        );
+    }
+
+    static public function addNewRol($rolescod, $rolesdsc, $rolesest)
+    {
+        $sqlins = "INSERT INTO roles (rolescod, rolesdsc, rolesest)
+        VALUES (:rolescod, :rolesdsc, :rolesest);";
+
+        return self::executeNonQuery(
+            $sqlins,
+            array(
+                "rolescod" => $rolescod,
+                "rolesdsc" => $rolesdsc,
+                "rolesest" => $rolesest
             )
         );
     }

@@ -52,17 +52,37 @@ class Login extends \Controllers\PublicController
                                 $dbUser["useremail"]
                             )
                         );
+                        
                     }
-
+                       if (! $this->hasError) {
+                        if (
+                            \Utilities\Security::isAdminOrEci($dbUser["usercod"]) &&
+                            strpos(
+                                \Utilities\Context::getContextByKey("redirto"),
+                                "Checkout_Checkout"
+                            ) !== false
+                        ) {
+                            $this->generalError =
+                                "¡Los usuarios administrativos no pueden acceder al checkout!";
+                            $this->hasError = true;
+                        }
+                    }
                     if (! $this->hasError) {
                         \Utilities\Security::login(
                             $dbUser["usercod"],
                             $dbUser["username"],
                             $dbUser["useremail"]
                         );
-
+                     
                         $anoncod = CartFns::getAnnonCartCode();
-                        Cart::moveAnonToAuth($anoncod, $dbUser["usercod"]);
+                        if (\Utilities\Security::isAdminOrEci($dbUser["usercod"])) {
+                            Cart::clearAnonCart($anoncod);
+                            Cart::clearCart($dbUser["usercod"]);
+                            \Utilities\Context::setContext('CART_ITEMS', 0);
+                            unset($_SESSION['annonCartCode']);
+                        } else {
+                            Cart::moveAnonToAuth($anoncod, $dbUser["usercod"]);
+                        }
 
                         if (\Utilities\Context::getContextByKey("redirto") !== "") {
                             \Utilities\Site::redirectTo(

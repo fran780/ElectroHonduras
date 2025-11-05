@@ -2,13 +2,13 @@
 
 namespace Controllers\Usuarios;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Utilities\Context;
 use Utilities\Paging;
 use Dao\Usuarios\Usuarios as DaoUsuarios;
 use Views\Renderer;
 
-class Usuarios extends PublicController
+class Usuarios extends PrivateController
 {
     private $partialName = "";
     private $partialEmail = "";

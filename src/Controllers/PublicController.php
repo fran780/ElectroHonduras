@@ -43,6 +43,9 @@ abstract class PublicController implements IController
             }
         }
         $showCart = true;
+        if (\Utilities\Security::isLogged()) {
+            $showCart = !\Utilities\Security::isAdminOrEci();
+        }
         \Utilities\Context::setContext("SHOW_CART", $showCart);
         $this->getCartCounter();
     }
@@ -78,6 +81,5 @@ abstract class PublicController implements IController
             $totalItems += intval($item["crrctd"] ?? 0);
         }
 
-        \Utilities\Context::setContext("CART_ITEMS", $totalItems);
-    }
+        \Utilities\Context::setContext("CART_ITEMS", $totalItems);}
 }
