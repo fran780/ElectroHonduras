@@ -25,4 +25,9 @@ INSERT INTO `usuario` (`usercod`, `useremail`, `username`, `userpswd`, `userfchi
 (1, 'guillermoortega29@gmail.com', 'Guillermo Ortega', '$2y$10$oALGvNDVi4pcHgqmlI/vNOq6Syus.eLX6McCsNStuvwYgjsxAGP6K', '2025-10-20 19:19:44', 'ACT', '2026-01-18 00:00:00', 'ACT', '383530522863ab55255542c0ff72060c656290a9e6788779bd4c6cf59e660f74', '2025-10-20 19:19:44', 'PBL'),
 (2, 'fmfran7777@gmail.com', 'Francisco Fernandez', '$2y$10$UZfDtBdUoKdSclmoD746bOE.SqsHfGV/ZaKJHpXDV0kAhmrbxp8pm', '2025-10-20 19:21:25', 'ACT', '2026-01-18 00:00:00', 'ACT', '1a57d19b95e94f5e6adacd155b976f99735557daedb06a319744013af243719c', '2025-10-20 19:21:25', 'PBL'),
 (3, 'alejandropalacios2821@gmail.com', 'Alejandro Palacios', '$2y$10$UggMne3h6Gf1rLP2tpFl1OI9gaQd6CumJ2oBokOwHL2MDzvBta3p.', '2025-10-20 19:21:45', 'ACT', '2026-01-18 00:00:00', 'ACT', 'dd422ebdcea5f2b88ac779b40ae5e3fb31853e3e1ecc09e8c01e2e39e8ac2af8', '2025-10-20 19:21:45', 'PBL');
-       
+
+INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
+('Controllers\\Checkout\\Checkout', 'Acceso al Checkout para clientes', 'ACT', 'CTR');
+
+INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
+('CLI', 'Controllers\\Checkout\\Checkout', 'ACT', '2026-11-04');

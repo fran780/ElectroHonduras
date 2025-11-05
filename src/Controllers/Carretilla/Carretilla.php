@@ -4,6 +4,7 @@ namespace Controllers\Carretilla;
 
 use Controllers\PublicController;
 use Dao\Cart\Cart;
+use Utilities\Security;
 use Utilities\Cart\CartFns;
 use Utilities\Site;
 
@@ -14,9 +15,12 @@ class Carretilla extends PublicController
         Site::addLink("public/css/products.css");
         $viewData = [];
 
-        // En esta fase estara todo público, por lo tanto se usa solo la carretilla anónima
-        $anonCod = CartFns::getAnnonCartCode();
-        $carretilla = Cart::getAnonCart($anonCod);
+        $userIsLogged = Security::isLogged();
+        $userId = $userIsLogged ? Security::getUserId() : CartFns::getAnnonCartCode();
+        
+        $carretilla = $userIsLogged
+            ? Cart::getAuthCart($userId)
+            : Cart::getAnonCart($userId);
 
         if ($this->isPostBack()) {
             if (isset($_POST["removeOne"]) || isset($_POST["addOne"])) {
@@ -26,26 +30,47 @@ class Carretilla extends PublicController
 
                 if ($amount === 1) {
                     if ($productoDisp["productStock"] - $amount >= 0) {
+                        if ($userIsLogged) {
+                            Cart::addToAuthCart(
+                                $productId,
+                                $userId,
+                                $amount,
+                                $productoDisp["productPrice"]
+                            );
+                        } else {
+                            Cart::addToAnonCart(
+                                $productId,
+                                $userId,
+                                $amount,
+                                $productoDisp["productPrice"]
+                            );
+                        }
+                    }
+                } else {
+
+                    if ($userIsLogged) {
+                        Cart::addToAuthCart(
+                            $productId,
+                            $userId,
+                            $amount,
+                            $productoDisp["productPrice"]
+                        );
+                    } else {
                         Cart::addToAnonCart(
                             $productId,
-                            $anonCod,
+                            $userId,
                             $amount,
                             $productoDisp["productPrice"]
                         );
                     }
-                } else {
-                    Cart::addToAnonCart(
-                        $productId,
-                        $anonCod,
-                        $amount,
-                        $productoDisp["productPrice"]
-                    );
                 }
 
-                $carretilla = Cart::getAnonCart($anonCod);
+                $carretilla = $userIsLogged
+                    ? Cart::getAuthCart($userId)
+                    : Cart::getAnonCart($userId);
                 $this->getCartCounter();
             }
-            Site::redirectTo("index.php?page=Carretilla_Carretilla");
+             Site::redirectTo("index.php?page=Carretilla_Carretilla");
         }
 
         $finalCarretilla = [];
@@ -64,7 +89,6 @@ class Carretilla extends PublicController
         $viewData["carretilla"] = $finalCarretilla;
         $viewData["total"] = number_format($total, 2);
 
-        // el botón solo dirige al checkout si hay productos
         $viewData["botonTexto"] = ($total > 0) ? "Ir al Checkout" : "Seguir comprando";
         $viewData["botonUrl"] = ($total > 0) ? "index.php?page=Checkout_Checkout" : "index.php?page=Index";
         $viewData["botonIcono"] = ($total > 0) ? "shopping-cart" : "store";

@@ -1,5 +1,10 @@
 <?php
+
 namespace Controllers\Sec;
+
+use Dao\Cart\Cart;
+use Utilities\Cart\CartFns;
+
 class Login extends \Controllers\PublicController
 {
     private $txtEmail = "";
@@ -9,7 +14,7 @@ class Login extends \Controllers\PublicController
     private $generalError = "";
     private $hasError = false;
 
-    public function run() :void
+    public function run(): void
     {
         if ($this->isPostBack()) {
             $this->txtEmail = $_POST["txtEmail"];
@@ -47,14 +52,18 @@ class Login extends \Controllers\PublicController
                                 $dbUser["useremail"]
                             )
                         );
-                        // Aqui se debe establecer acciones segun la politica de la institucion.
                     }
+
                     if (! $this->hasError) {
                         \Utilities\Security::login(
                             $dbUser["usercod"],
                             $dbUser["username"],
                             $dbUser["useremail"]
                         );
+
+                        $anoncod = CartFns::getAnnonCartCode();
+                        Cart::moveAnonToAuth($anoncod, $dbUser["usercod"]);
+
                         if (\Utilities\Context::getContextByKey("redirto") !== "") {
                             \Utilities\Site::redirectTo(
                                 \Utilities\Context::getContextByKey("redirto")
@@ -78,4 +87,3 @@ class Login extends \Controllers\PublicController
         \Views\Renderer::render("security/login", $dataView);
     }
 }
-?>
