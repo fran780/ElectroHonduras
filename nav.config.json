@@ -33,6 +33,11 @@
       "nav_label": "Carretilla de Compra"
     },
     {
+      "id": "Menu_TransHist",
+      "nav_url": "index.php?page=Checkout_History",
+      "nav_label": "<i class=\"fas fa-file-invoice-dollar\"></i>&nbsp;Historial de Compras"
+    },
+    {
       "id": "Menu_Productos",
       "nav_url": "index.php?page=Productos_ProductosList",
       "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Inventario Productos"

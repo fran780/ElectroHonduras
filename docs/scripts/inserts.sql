@@ -64,3 +64,12 @@ INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
 ('productos_DSP', 'Detalle de Productos', 'ACT', 'FNC'),
 ('productos_INS', 'Agregar Productos', 'ACT', 'FNC'),
 ('productos_UPD', 'Editar Productos', 'ACT', 'FNC');
+
+INSERT INTO funciones (fncod, fndsc, fnest, fntyp) VALUES
+('Controllers\\Checkout\\History', 'Listado Historial de Transacciones', 'ACT', 'CTR'),
+('Controllers\\Checkout\\HistoryDetail', 'Formulario de Historial de Transacciones', 'ACT', 'CTR');
+
+INSERT INTO funciones_roles (rolescod, fncod, fnrolest, fnexp) VALUES
+('CLI', 'Menu_TransHist', 'ACT', '2026-11-05'),
+('CLI', 'Controllers\\Checkout\\History', 'ACT', '2026-11-05'),
+('CLI', 'Controllers\\Checkout\\HistoryDetail', 'ACT', '2026-11-05');
