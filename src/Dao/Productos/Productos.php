@@ -42,52 +42,74 @@ class Productos extends Table
             ["productId" => $productId]
         );
     }
+
+    public static function getByIds(array $productIds): array
+    {
+        if (count($productIds) === 0) {
+            return [];
+        }
+
+        $placeholders = [];
+        $params = [];
+        foreach (array_values($productIds) as $index => $productId) {
+            $key = "productId" . $index;
+            $placeholders[] = ":" . $key;
+            $params[$key] = $productId;
+        }
+
+        $sql = sprintf(
+            "SELECT productId, productName FROM electronics_products WHERE productId IN (%s);",
+            implode(", ", $placeholders)
+        );
+
+        return self::obtenerRegistros($sql, $params);
+    }
+
     public static function getProductos(
-    string $partialName = "",
-    string $status = "",
-    int $page = 0,
-    int $itemsPerPage = 10
-) {
-    $sqlstr = "SELECT productId, productName, productDescription, productPrice,
+        string $partialName = "",
+        string $status = "",
+        int $page = 0,
+        int $itemsPerPage = 10
+    ) {
+        $sqlstr = "SELECT productId, productName, productDescription, productPrice,
                       productImgUrl, productStock, productStatus,
                       CASE WHEN productStatus = 'ACT' THEN 'Activo' ELSE 'Inactivo' END as productStatusDsc
                FROM electronics_products";
-    $sqlstrCount = "SELECT COUNT(*) as total FROM electronics_products";
+        $sqlstrCount = "SELECT COUNT(*) as total FROM electronics_products";
 
-    $conditions = [];
-    $params = [];
+        $conditions = [];
+        $params = [];
 
-    if ($partialName !== "") {
-        $conditions[] = "productName LIKE :partialName";
-        $params["partialName"] = "%" . $partialName . "%";
+        if ($partialName !== "") {
+            $conditions[] = "productName LIKE :partialName";
+            $params["partialName"] = "%" . $partialName . "%";
+        }
+
+        if (in_array($status, ["ACT", "INA"])) {
+            $conditions[] = "productStatus = :status";
+            $params["status"] = $status;
+        }
+
+        if (count($conditions) > 0) {
+            $where = " WHERE " . implode(" AND ", $conditions);
+            $sqlstr .= $where;
+            $sqlstrCount .= $where;
+        }
+
+        $total = self::obtenerUnRegistro($sqlstrCount, $params)["total"];
+        $pagesCount = max(ceil($total / $itemsPerPage), 1);
+        if ($page > $pagesCount - 1) {
+            $page = $pagesCount - 1;
+        }
+
+        $sqlstr .= " LIMIT " . max(0, $page * $itemsPerPage) . ", " . $itemsPerPage;
+        $productos = self::obtenerRegistros($sqlstr, $params);
+
+        return [
+            "productos" => $productos,
+            "total" => $total,
+            "page" => $page,
+            "itemsPerPage" => $itemsPerPage
+        ];
     }
-
-    if (in_array($status, ["ACT", "INA"])) {
-        $conditions[] = "productStatus = :status";
-        $params["status"] = $status;
-    }
-
-    if (count($conditions) > 0) {
-        $where = " WHERE " . implode(" AND ", $conditions);
-        $sqlstr .= $where;
-        $sqlstrCount .= $where;
-    }
-
-    $total = self::obtenerUnRegistro($sqlstrCount, $params)["total"];
-    $pagesCount = max(ceil($total / $itemsPerPage), 1);
-    if ($page > $pagesCount - 1) {
-        $page = $pagesCount - 1;
-    }
-
-    $sqlstr .= " LIMIT " . max(0, $page * $itemsPerPage) . ", " . $itemsPerPage;
-    $productos = self::obtenerRegistros($sqlstr, $params);
-
-    return [
-        "productos" => $productos,
-        "total" => $total,
-        "page" => $page,
-        "itemsPerPage" => $itemsPerPage
-    ];
-}
-
 }

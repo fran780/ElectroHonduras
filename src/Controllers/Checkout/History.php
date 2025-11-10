@@ -7,6 +7,8 @@ use Dao\Transactions\Transactions;
 use Utilities\Security;
 use Utilities\Context;
 use Utilities\Paging;
+use Dao\Productos\Productos;
+use Utilities\Checkout\OrderItemHelper;
 
 class History extends PrivateController
 {
@@ -40,11 +42,36 @@ class History extends PrivateController
             $this->pageNumber = $this->pages;
         }
 
+        $allProductIds = [];
         foreach ($this->transactions as &$txn) {
             $date = new \DateTime($txn["transdate"]);
             $txn["transdate"] = $date->format("Y-m-d");
             $txn["amount"] = number_format($txn["amount"], 2);
             $txn["statusClass"] = $this->getStatusClass($txn["transstatus"]);
+            $txn["items"] = $this->extractItemsFromOrder($txn["orderjson"] ?? "");
+            foreach ($txn["items"] as $item) {
+                if ($item["productId"] !== null) {
+                    $allProductIds[$item["productId"]] = true;
+                }
+            }
+        }
+
+        $productsMap = $this->getProductsMap(array_keys($allProductIds));
+
+        foreach ($this->transactions as &$txn) {
+            $summaryParts = [];
+            foreach ($txn["items"] as &$item) {
+                $productId = $item["productId"];
+                $productName = $item["name"];
+                if ($productId !== null && isset($productsMap[$productId])) {
+                    $productName = $productsMap[$productId]["productName"];
+                }
+                $item["productName"] = $productName;
+                $quantity = $item["quantity"];
+                $summaryParts[] = $quantity > 1 ? sprintf("%s (x%d)", $productName, $quantity) : $productName;
+            }
+            $txn["productsSummary"] = count($summaryParts) > 0 ? implode(", ", $summaryParts) : "Sin productos";
+            unset($txn["orderjson"]);
         }
 
         $this->setParamsToContext();
@@ -121,5 +148,24 @@ class History extends PrivateController
             "FAILED" => "text-danger"
         ];
         return $map[$status] ?? "";
+    }
+
+    private function extractItemsFromOrder($orderJson): array
+    {
+        return OrderItemHelper::extractItems($orderJson);
+    }
+
+    private function getProductsMap(array $productIds): array
+    {
+        if (count($productIds) === 0) {
+            return [];
+        }
+
+        $products = Productos::getByIds($productIds);
+        $map = [];
+        foreach ($products as $product) {
+            $map[intval($product["productId"])] = $product;
+        }
+        return $map;
     }
 }

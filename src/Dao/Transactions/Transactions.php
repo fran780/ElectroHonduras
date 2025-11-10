@@ -39,7 +39,7 @@ class Transactions extends Table
         int $page = 0,
         int $itemsPerPage = 10
     ) {
-        $baseSql = "SELECT transactionId, orderid, transdate, transstatus, amount, currency FROM transactions WHERE usercod = :usercod";
+        $baseSql = "SELECT transactionId, orderid, transdate, transstatus, amount, currency, orderjson FROM transactions WHERE usercod = :usercod";
         $baseSqlCount = "SELECT COUNT(*) as total FROM transactions WHERE usercod = :usercod";
         $conditions = [];
         $params = ["usercod" => $usercod];

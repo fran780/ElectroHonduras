@@ -33,7 +33,8 @@
                 <th>Orden</th>
                 <th>Fecha</th>
                 <th>Estado</th>
-                <th class="right">Monto</th>
+                <th>Productos</th>
+                <th class="center">Total</th>
                 <th class="center">Moneda</th>
                 <th></th>
             </tr>
@@ -46,7 +47,8 @@
                 <td class="center">
                     <span class="{{statusClass}}">{{transstatus}}</span>
                 </td>
-                <td class="right">{{amount}}</td>
+                <td class="center">{{productsSummary}}</td>
+                <td class="center">{{amount}}</td>
                 <td class="center">{{currency}}</td>
                 <td class="center">
                     <a href="index.php?page=Checkout_HistoryDetail&id={{transactionId}}">Ver</a>
