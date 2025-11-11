@@ -22,6 +22,22 @@ class Validators {
     {
         return preg_match("/^\+?\(?(504)?\)?\s?[389]\d{3}[\-\s]?\d{4}$/", $valor) && true;
     }
+     static public function IsValidHumanName($valor, $minLength = 3, $maxLength = 60)
+    {
+        if (self::IsEmpty($valor)) {
+            return false;
+        }
+
+        $valor = trim($valor);
+        $length = function_exists('mb_strlen') ? mb_strlen($valor, 'UTF-8') : strlen($valor);
+
+        if ($length < $minLength || $length > $maxLength) {
+            return false;
+        }
+
+        return preg_match("/^[\p{L}]+(?:[ \-'][\p{L}]+)*$/u", $valor) === 1;
+    }
+
 
     private function __construct()
     {
@@ -32,5 +48,3 @@ class Validators {
         
     }
 }
-
-?>

@@ -48,7 +48,7 @@ class Security extends \Dao\Table
         return self::obtenerRegistros($sqlstr, array());
     }
 
-    static public function newUsuario($email, $password)
+    static public function newUsuario($email, $password, $firstName = "", $lastName = "")
     {
         if (!\Utilities\Validators::IsValidEmail($email)) {
             throw new Exception("Correo no es válido");
@@ -56,6 +56,20 @@ class Security extends \Dao\Table
         if (!\Utilities\Validators::IsValidPassword($password)) {
             throw new Exception("Contraseña debe ser almenos 8 caracteres, 1 número, 1 mayúscula, 1 símbolo especial");
         }
+
+        $firstName = trim($firstName);
+        $lastName = trim($lastName);
+
+        if (!\Utilities\Validators::IsValidHumanName($firstName)) {
+            throw new Exception("Nombre no es válido");
+        }
+
+        if (!\Utilities\Validators::IsValidHumanName($lastName)) {
+            throw new Exception("Apellido no es válido");
+        }
+
+        $firstName = preg_replace('/\s+/', ' ', $firstName);
+        $lastName = preg_replace('/\s+/', ' ', $lastName);
 
         $newUser = self::_usuarioStruct();
         $hashedPassword = self::_hashPassword($password);
@@ -65,7 +79,7 @@ class Security extends \Dao\Table
         unset($newUser["userpswdchg"]);
 
         $newUser["useremail"] = $email;
-        $newUser["username"] = "";
+        $newUser["username"] = trim(sprintf("%s %s", $firstName, $lastName));
         $newUser["userpswd"] = $hashedPassword;
         $newUser["userpswdest"] = Estados::ACTIVO;
         $newUser["userpswdexp"] = date('Y-m-d', time() + 7776000);  //(3*30*24*60*60) (m d h mi s)
