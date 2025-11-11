@@ -45,6 +45,26 @@
       {{endif userest_error}}
     </div>
 
+    <div class="row my-2 align-start">
+      <label class="col-12 col-m-3" for="rolesList">Roles</label>
+      <div class="col-12 col-m-9" id="rolesList">
+        <div class="row">
+          {{ifnot ~hasRoles}}
+          <div class="col-12">No hay roles disponibles</div>
+          {{endifnot ~hasRoles}}
+          {{foreach ~roles}}
+          <label class="col-12 col-m-6 my-1 role-option">
+            <input type="checkbox" name="roles[]" value="{{rolescod}}" {{checked}} {{rolesDisabledAttr}} />
+            <span>{{rolesdsc}}</span>
+          </label>
+          {{endfor ~roles}}
+        </div>
+        {{if ~roles_error}}
+        <div class="col-12 col-m-9 offset-m-3 error">{{~roles_error}}</div>
+        {{endif ~roles_error}}
+      </div>
+    </div>
+
     {{endwith usuario}}
 
     <div class="row my-4 align-center flex-end">

@@ -79,9 +79,16 @@
                     {{endif OrderUseremail}}
                 </th>
 
+                <th class="left">Roles</th>
+
                 <th>Estado</th>
-                <th>
-                    <a href="index.php?page=Usuarios_Usuario&mode=INS">Nuevo</a>
+                <th>Acciones
+                    <div style="position:relative; height:0;">
+                        <button type="button" onclick="window.location.href='index.php?page=Usuarios_Usuario&mode=INS'"
+                            style="position:absolute; top:-113px; left:50%; transform:translateX(-50%);">
+                            Nuevo
+                        </button>
+                    </div>
                 </th>
             </tr>
         </thead>
@@ -91,13 +98,19 @@
                 <td class="center">{{usercod}}</td>
                 <td class="center">{{username}}</td>
                 <td class="center">{{useremail}}</td>
+                <td class="center">{{rolesList}}</td>
                 <td class="center">{{userestDsc}}</td>
                 <td class="center">
                     <a href="index.php?page=Usuarios_Usuario&mode=DSP&usercod={{usercod}}">Ver</a>
                     &nbsp;
                     <a href="index.php?page=Usuarios_Usuario&mode=UPD&usercod={{usercod}}">Editar</a>
                     &nbsp;
+                    {{if canDelete}}
                     <a href="index.php?page=Usuarios_Usuario&mode=DEL&usercod={{usercod}}">Eliminar</a>
+                    {{endif canDelete}}
+                    {{ifnot canDelete}}
+                    <span class="action-disabled" title="No puede eliminar su propia cuenta">Eliminar</span>
+                    {{endifnot canDelete}}
                 </td>
             </tr>
             {{endfor usuarios}}

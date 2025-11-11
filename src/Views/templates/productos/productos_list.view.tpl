@@ -36,9 +36,15 @@
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Estado</th>
-                <th>
+                <th> Acciones
                     {{if ~product_INS}}
-                    <a href="index.php?page=Productos_ProductosForm&mode=INS">Nuevo</a>
+                    <div style="position:relative; height:0;">
+                        <button type="button"
+                            onclick="window.location.href='index.php?page=Productos_ProductosForm&mode=INS'"
+                            style="position:absolute; top:-100px; left:50%; transform:translateX(-50%);">
+                            Nuevo
+                        </button>
+                    </div>
                     {{endif ~product_INS}}
                 </th>
             </tr>

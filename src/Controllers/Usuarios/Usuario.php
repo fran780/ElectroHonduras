@@ -5,6 +5,7 @@ namespace Controllers\Usuarios;
 use Controllers\PrivateController;
 use Views\Renderer;
 use Dao\Usuarios\Usuarios as UsuariosDao;
+use Utilities\Security;
 use Utilities\Site;
 use Utilities\Validators;
 
@@ -26,6 +27,11 @@ class Usuario extends PrivateController
         "useremail" => "",
         "userest" => "ACT"
     ];
+    private $roles = [];
+    private $originalRoles = [];
+    private $isEditingSelf = false;
+    private $availableRoles = [];
+    private $rolesError = "";
     private $usuario_xss_token = "";
 
     public function run(): void
@@ -51,16 +57,43 @@ class Usuario extends PrivateController
     {
         $this->mode = $_GET["mode"] ?? "NOF";
         if (isset($this->modeDescriptions[$this->mode])) {
-            $this->readonly = $this->mode === "DEL" ? "readonly" : "";
+            $requestedUserId = intval($_GET["usercod"] ?? 0);
+            if ($this->mode === "DEL" && $requestedUserId === Security::getUserId()) {
+                Site::redirectToWithMsg(
+                    "index.php?page=Usuarios_Usuarios",
+                    "No puede eliminar su propia cuenta"
+                );
+                return;
+            }
+            $this->readonly = ($this->mode === "DEL" || $this->mode === "DSP") ? "readonly" : "";
             $this->showCommitBtn = $this->mode !== "DSP";
             if ($this->mode !== "INS") {
-                $this->usuario = UsuariosDao::getUsuarioById(intval($_GET["usercod"]));
+                $this->usuario = UsuariosDao::getUsuarioById($requestedUserId);
                 if (!$this->usuario) {
                     throw new \Exception("No se encontró el Usuario", 1);
                 }
+                $this->roles = UsuariosDao::getActiveRoleCodesForUser($this->usuario["usercod"]);
+                if (count($this->roles) > 1) {
+                    $this->roles = array_slice($this->roles, 0, 1);
+                }
+                $this->roles = UsuariosDao::getActiveRoleCodesForUser($this->usuario["usercod"]);
+                if (count($this->roles) > 1) {
+                    $this->roles = array_slice($this->roles, 0, 1);
+                }
+                $this->originalRoles = $this->roles;
+                $this->isEditingSelf = ($this->usuario["usercod"] === Security::getUserId());
             }
         } else {
             throw new \Exception("Formulario cargado en modalidad invalida", 1);
+        }
+        $this->availableRoles = UsuariosDao::getActiveRoles();
+        if ($this->mode === "INS" && count($this->roles) === 0) {
+            foreach ($this->availableRoles as $role) {
+                if ($role["rolescod"] === "CLI") {
+                    $this->roles[] = "CLI";
+                    break;
+                }
+            }
         }
     }
 
@@ -77,6 +110,33 @@ class Usuario extends PrivateController
         $this->usuario["username"] = strval($_POST["username"] ?? "");
         $this->usuario["useremail"] = strval($_POST["useremail"] ?? "");
         $this->usuario["userest"] = strval($_POST["userest"] ?? "");
+        $rolesInput = $_POST["roles"] ?? "";
+        $rolesErrors = [];
+
+        if (is_array($rolesInput)) {
+            $rolesInput = array_values(array_filter(array_map("strval", $rolesInput)));
+            if (count($rolesInput) > 1) {
+                $rolesErrors[] = "Solo puede seleccionar un rol";
+            }
+            $rolesInput = $rolesInput[0] ?? "";
+        }
+
+        $rolesInput = strval($rolesInput);
+
+        $validRoles = array_column($this->availableRoles, "rolescod");
+
+        if ($rolesInput !== "" && !in_array($rolesInput, $validRoles)) {
+            $rolesInput = "";
+        }
+
+        $this->roles = $rolesInput !== "" ? [$rolesInput] : [];
+
+        if ($this->mode === "UPD" && $this->isEditingSelf && in_array("ADMIN", $this->originalRoles)) {
+            if ($rolesInput !== "ADMIN") {
+                $rolesErrors[] = "Su cuenta debe conservar el rol Administrador";
+                $this->roles = ["ADMIN"];
+            }
+        }
 
         if (Validators::IsEmpty($this->usuario["username"])) {
             $errors["username_error"] = "El nombre de usuario es requerido";
@@ -90,12 +150,23 @@ class Usuario extends PrivateController
             $errors["userest_error"] = "El estado del usuario es inválido";
         }
 
+        if (empty($rolesErrors) && count($validRoles) > 0 && count($this->roles) === 0) {
+            $rolesErrors[] = "Debe seleccionar un rol";
+        }
+
+        if (!empty($rolesErrors)) {
+            $errors["roles_error"] = implode(". ", array_unique($rolesErrors));
+        }
+
+
         if (count($errors) > 0) {
             foreach ($errors as $key => $value) {
                 $this->usuario[$key] = $value;
             }
+            $this->rolesError = $errors["roles_error"] ?? "";
             return false;
         }
+        $this->rolesError = "";
         return true;
     }
 
@@ -118,17 +189,20 @@ class Usuario extends PrivateController
 
     private function handleInsert()
     {
-        $result = UsuariosDao::insertUsuario(
+        $usercod = UsuariosDao::insertUsuario(
             $this->usuario["username"],
             $this->usuario["useremail"],
             $this->usuario["userest"]
         );
-        if ($result > 0) {
-            Site::redirectToWithMsg(
-                "index.php?page=Usuarios_Usuarios",
-                "Usuario creado exitosamente"
-            );
+
+        if ($usercod <= 0) {
+            throw new \Exception("No se pudo crear el usuario", 1);
         }
+        UsuariosDao::syncUsuarioRoles($usercod, $this->roles);
+        Site::redirectToWithMsg(
+            "index.php?page=Usuarios_Usuarios",
+            "Usuario creado exitosamente"
+        );
     }
 
     private function handleUpdate()
@@ -139,16 +213,26 @@ class Usuario extends PrivateController
             $this->usuario["useremail"],
             $this->usuario["userest"]
         );
-        if ($result > 0) {
-            Site::redirectToWithMsg(
-                "index.php?page=Usuarios_Usuarios",
-                "Usuario actualizado exitosamente"
-            );
+        if (!$result) {
+            throw new \Exception("No se pudo actualizar el usuario", 1);
         }
+        UsuariosDao::syncUsuarioRoles($this->usuario["usercod"], $this->roles);
+        Site::redirectToWithMsg(
+            "index.php?page=Usuarios_Usuarios",
+            "Usuario actualizado exitosamente"
+        );
     }
 
     private function handleDelete()
     {
+        $loggedUserId = Security::getUserId();
+        if ($this->usuario["usercod"] == $loggedUserId) {
+            Site::redirectToWithMsg(
+                "index.php?page=Usuarios_Usuarios",
+                "No puede eliminar su propia cuenta"
+            );
+            return;
+        }
         $result = UsuariosDao::deleteUsuario($this->usuario["usercod"]);
         if ($result > 0) {
             Site::redirectToWithMsg(
@@ -174,5 +258,23 @@ class Usuario extends PrivateController
         $this->usuario[$userestKey] = "selected";
 
         $this->viewData["usuario"] = $this->usuario;
+
+        $disableRoles = ($this->mode === "DSP" || $this->mode === "DEL");
+        $lockAdminRole = $this->isEditingSelf && in_array("ADMIN", $this->originalRoles);
+        $rolesForView = array_map(function ($role) use ($disableRoles, $lockAdminRole) {
+            $shouldDisable = $disableRoles || ($lockAdminRole && $role["rolescod"] !== "ADMIN");
+            return [
+                "rolescod" => $role["rolescod"],
+                "rolesdsc" => $role["rolesdsc"],
+                "checked" => in_array($role["rolescod"], $this->roles) ? "checked" : "",
+                "rolesDisabledAttr" => $shouldDisable ? "disabled" : ""
+            ];
+        }, $this->availableRoles);
+
+        $this->viewData["roles"] = $rolesForView;
+        $this->viewData["hasRoles"] = count($rolesForView) > 0;
+        if ($this->rolesError !== "") {
+            $this->viewData["roles_error"] = $this->rolesError;
+        }
     }
 }

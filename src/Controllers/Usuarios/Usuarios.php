@@ -5,6 +5,7 @@ namespace Controllers\Usuarios;
 use Controllers\PrivateController;
 use Utilities\Context;
 use Utilities\Paging;
+use Utilities\Security;
 use Dao\Usuarios\Usuarios as DaoUsuarios;
 use Views\Renderer;
 
@@ -21,9 +22,11 @@ class Usuarios extends PrivateController
     private $usuarios = [];
     private $usuariosCount = 0;
     private $pages = 0;
+    private $currentUserId = 0;
 
     public function run(): void
     {
+        $this->currentUserId = Security::getUserId();
         $this->getParamsFromContext();
         $this->getParams();
         $tmpUsuarios = DaoUsuarios::getUsuarios(
@@ -36,6 +39,10 @@ class Usuarios extends PrivateController
             $this->itemsPerPage
         );
         $this->usuarios = $tmpUsuarios["usuarios"];
+        foreach ($this->usuarios as &$usuario) {
+            $usuario["canDelete"] = ($usuario["usercod"] != $this->currentUserId) ? "1" : "";
+        }
+        unset($usuario);
         $this->usuariosCount = $tmpUsuarios["total"];
         $this->pages = $this->usuariosCount > 0 ? ceil($this->usuariosCount / $this->itemsPerPage) : 1;
         if ($this->pageNumber > $this->pages) {

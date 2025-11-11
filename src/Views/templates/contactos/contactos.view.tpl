@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="map">
+     <div class="map">
       <iframe 
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.3344019714295!2d-87.9701093596203!3d14.693671685862853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65c7022b4b15f7%3A0x13944ff6de5370b8!2sTaulab%C3%A9%2C%20Comayagua!5e0!3m2!1sen!2shn!4v1753660913549!5m2!1sen!2shn" 
         width="100%"  
@@ -86,58 +86,58 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-        formValidatorInit();
+      formValidatorInit();
     });
 
     function formValidatorInit() {
-        const txtNombre = document.getElementById("txtNombre");
-        const txtApellido = document.getElementById("txtApellido");
-        const txtCorreo = document.getElementById("txtCorreo");
-        const txtTelefono = document.getElementById("txtTelefono");
-        const txtMen = document.getElementById("txtMen");
+      const txtNombre = document.getElementById("txtNombre");
+      const txtApellido = document.getElementById("txtApellido");
+      const txtCorreo = document.getElementById("txtCorreo");
+      const txtTelefono = document.getElementById("txtTelefono");
+      const txtMen = document.getElementById("txtMen");
 
-        const btnProcesar = document.getElementById("btnProcesar");
-        const contactForm = document.getElementById("contactForm");
+      const btnProcesar = document.getElementById("btnProcesar");
+      const contactForm = document.getElementById("contactForm");
 
-        const isEmpty = /^\s*$/gm;
-        const isValidEmail = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
-        const isValidHonduranCelPhone = /^\+?\(?(504)?\)?\s?[389]\d{3}[\-\s]?\d{4}$/gm;
+      const isEmpty = /^\s*$/;
+      const isValidEmail = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+      const isValidHonduranCelPhone = /^\+?\(?(504)?\)?\s?[389]\d{3}[\-\s]?\d{4}$/;
 
-        btnProcesar.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+      btnProcesar.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-            let hasErrors = false;
+        let hasErrors = false;
 
-            if (isEmpty.test(txtNombre.value)) {
-                alert("Error: El Nombre no es válido");
-                hasErrors = true;
-            }
+        if (isEmpty.test(txtNombre.value)) {
+          alert("Error: El Nombre no es válido");
+          hasErrors = true;
+        }
 
-            if (isEmpty.test(txtApellido.value)) {
-                alert("Error: El Apellido no es válido");
-                hasErrors = true;
-            }
+        if (isEmpty.test(txtApellido.value)) {
+          alert("Error: El Apellido no es válido");
+          hasErrors = true;
+        }
 
-            if (!isValidEmail.test(txtCorreo.value)) {
-                alert("Error: El Correo no es válido");
-                hasErrors = true;
-            }
+        if (!isValidEmail.test(txtCorreo.value)) {
+          alert("Error: El Correo no es válido");
+          hasErrors = true;
+        }
 
-            if (!isValidHonduranCelPhone.test(txtTelefono.value)) {
-                alert("Error: Escribe un Teléfono hondureño válido");
-                hasErrors = true;
-            }
+        if (!isValidHonduranCelPhone.test(txtTelefono.value)) {
+          alert("Error: Escribe un Teléfono hondureño válido");
+          hasErrors = true;
+        }
 
-            if (isEmpty.test(txtMen.value)) {
-                alert("Error: Escribe un mensaje para enviar");
-                hasErrors = true;
-            }
+        if (isEmpty.test(txtMen.value)) {
+          alert("Error: Escribe un mensaje para enviar");
+          hasErrors = true;
+        }
 
-            if (!hasErrors) {
-                contactForm.submit();
-            }
-        });
+        if (!hasErrors) {
+          contactForm.submit();
+        }
+      });
     }
   </script>
 </section>

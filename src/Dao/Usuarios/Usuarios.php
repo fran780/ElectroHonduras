@@ -15,27 +15,37 @@ class Usuarios extends Table
         int $page = 0,
         int $itemsPerPage = 10
     ) {
-        $sqlstr = "SELECT usercod, username, useremail, userest,
-                   CASE WHEN userest = 'ACT' THEN 'Activo' ELSE 'Inactivo' END as userestDsc
-                   FROM usuario";
 
-        $sqlstrCount = "SELECT COUNT(*) as count FROM usuario";
+        $sqlstr = "SELECT
+                        u.usercod,
+                       u.username,
+                        u.useremail,
+                       u.userest,
+                        CASE WHEN u.userest = 'ACT' THEN 'Activo' ELSE 'Inactivo' END as userestDsc,
+                        COALESCE(GROUP_CONCAT(DISTINCT r.rolesdsc ORDER BY r.rolesdsc SEPARATOR ', '), 'Sin roles') as rolesList
+                    FROM usuario u
+                    LEFT JOIN roles_usuarios ru
+                        ON ru.usercod = u.usercod AND ru.roleuserest = 'ACT'
+                    LEFT JOIN roles r
+                        ON r.rolescod = ru.rolescod AND r.rolesest = 'ACT'";
+
+        $sqlstrCount = "SELECT COUNT(*) as count FROM usuario u";
 
         $conditions = [];
         $params = [];
 
         if ($partialName != "") {
-            $conditions[] = "username LIKE :partialName";
+            $conditions[] = "u.username LIKE :partialName";
             $params["partialName"] = "%" . $partialName . "%";
         }
 
         if ($partialEmail != "") {
-            $conditions[] = "useremail LIKE :partialEmail";
+            $conditions[] = "u.useremail LIKE :partialEmail";
             $params["partialEmail"] = "%" . $partialEmail . "%";
         }
 
         if (in_array($status, ["ACT", "INA"])) {
-            $conditions[] = "userest = :status";
+            $conditions[] = "u.userest = :status";
             $params["status"] = $status;
         }
 
@@ -44,6 +54,8 @@ class Usuarios extends Table
             $sqlstr .= $where;
             $sqlstrCount .= $where;
         }
+
+        $sqlstr .= " GROUP BY u.usercod, u.username, u.useremail, u.userest";
 
         if (!in_array($orderBy, ["usercod", "username", "useremail", ""])) {
             throw new \Exception("Invalid orderBy value");
@@ -73,7 +85,7 @@ class Usuarios extends Table
     public static function getUsuarioById(int $usercod)
     {
         $sqlstr = "SELECT usercod, username, useremail, userest
-                   FROM usuario WHERE usercod = :usercod";
+                    FROM usuario WHERE usercod = :usercod";
         $params = ["usercod" => $usercod];
         return self::obtenerUnRegistro($sqlstr, $params);
     }
@@ -83,14 +95,16 @@ class Usuarios extends Table
         string $useremail,
         string $userest
     ) {
+        $conn = self::getConn();
         $sqlstr = "INSERT INTO usuario (username, useremail, userest, userfching)
-                   VALUES (:username, :useremail, :userest, NOW())";
+                    VALUES (:username, :useremail, :userest, NOW())";
         $params = [
             "username" => $username,
             "useremail" => $useremail,
             "userest" => $userest
         ];
-        return self::executeNonQuery($sqlstr, $params);
+        self::executeNonQuery($sqlstr, $params, $conn);
+        return intval($conn->lastInsertId());
     }
 
     public static function updateUsuario(
@@ -100,7 +114,7 @@ class Usuarios extends Table
         string $userest
     ) {
         $sqlstr = "UPDATE usuario SET username = :username, useremail = :useremail,
-                   userest = :userest WHERE usercod = :usercod";
+                    userest = :userest WHERE usercod = :usercod";
         $params = [
             "usercod" => $usercod,
             "username" => $username,
@@ -112,8 +126,97 @@ class Usuarios extends Table
 
     public static function deleteUsuario(int $usercod)
     {
-        $sqlstr = "DELETE FROM usuario WHERE usercod = :usercod";
-        $params = ["usercod" => $usercod];
-        return self::executeNonQuery($sqlstr, $params);
+        $conn = self::getConn();
+        try {
+            $conn->beginTransaction();
+
+            $params = ["usercod" => $usercod];
+
+            // Elimina las asignaciones de roles para que la restricción de clave externa no bloquee la eliminación
+            self::executeNonQuery(
+                "DELETE FROM roles_usuarios WHERE usercod = :usercod",
+                $params,
+                $conn
+            );
+
+            // Borra cualquier artículo que el usuario aún pueda tener en su carrito
+            self::executeNonQuery(
+                "DELETE FROM carretilla WHERE usercod = :usercod",
+                $params,
+                $conn
+            );
+
+            $result = self::executeNonQuery(
+                "DELETE FROM usuario WHERE usercod = :usercod",
+                $params,
+                $conn
+            );
+
+            $conn->commit();
+            return $result;
+        } catch (\Throwable $th) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
+            throw $th;
+        }
+    }
+
+    public static function getActiveRoles(): array
+    {
+        $sqlstr = "SELECT rolescod, rolesdsc FROM roles WHERE rolesest = 'ACT' ORDER BY rolesdsc";
+        return self::obtenerRegistros($sqlstr, []);
+    }
+
+    public static function getActiveRoleCodesForUser(int $usercod): array
+    {
+        $sqlstr = "SELECT rolescod FROM roles_usuarios WHERE usercod = :usercod AND roleuserest = 'ACT' ORDER BY roleuserfch DESC";
+        $rows = self::obtenerRegistros($sqlstr, ["usercod" => $usercod]);
+        $roles = array_map(static function ($row) {
+            return $row["rolescod"];
+        }, $rows);
+        if (count($roles) > 1) {
+            $roles = array_slice($roles, 0, 1);
+        }
+        return $roles;
+    }
+
+    public static function syncUsuarioRoles(int $usercod, array $rolescods): void
+    {
+        $rolescods = array_values(array_filter(array_unique(array_map('strval', $rolescods))));
+        if (count($rolescods) > 1) {
+            $rolescods = array_slice($rolescods, 0, 1);
+        }
+        $conn = self::getConn();
+        try {
+            $conn->beginTransaction();
+            self::executeNonQuery(
+                "DELETE FROM roles_usuarios WHERE usercod = :usercod",
+                ["usercod" => $usercod],
+                $conn
+            );
+
+            if (count($rolescods) > 0) {
+                $sqlInsert = "INSERT INTO roles_usuarios (usercod, rolescod, roleuserest, roleuserfch, roleuserexp)
+                              VALUES (:usercod, :rolescod, 'ACT', NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR))";
+                foreach ($rolescods as $rolescod) {
+                    self::executeNonQuery(
+                        $sqlInsert,
+                        [
+                            "usercod" => $usercod,
+                            "rolescod" => $rolescod
+                        ],
+                        $conn
+                    );
+                }
+            }
+
+            $conn->commit();
+        } catch (\Throwable $th) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
+            throw $th;
+        }
     }
 }
