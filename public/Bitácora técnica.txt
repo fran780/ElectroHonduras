@@ -71,3 +71,13 @@ Héctor Palacios diseñó el módulo que permite a los usuarios registrados visu
 
 4.1.5. Crear pantalla de Factura (6 al 7 de noviembre)
 Héctor Palacios desarrolló la pantalla de factura, donde se muestran los datos detallados de cada compra realizada. La vista incluye el número de orden, nombre del cliente, correo, fecha, comisión, monto neto y total. Además, se añadió la opción para imprimir o descargar la factura en formato PDF, verificando la correcta correspondencia con el pedido confirmado y la compatibilidad del formato en diferentes navegadores.
+
+5. Actualizaciones para mejorar el proyecto.
+
+Tras la culminación del Sprint 7, se realizaron mejoras funcionales y pequeños ajustes dentro de los módulos ya desarrollados. Las mejoras son las siguientes:
+
+- Mejoras en el módulo de usuarios: se agregó el campo de rol y nuevas funciones para la gestión interactiva de usuarios, además de corregirse el proceso que permite al administrador eliminar registros.
+
+- Actualización en el registro de clientes: se habilitó la captura de nombre y apellido con validaciones adicionales para garantizar la integridad de los datos.
+
+- Ampliación del historial de compras: se incorporó el campo de productos en el detalle de cada orden, incluyendo una tabla resumen con los artículos adquiridos por el cliente.
