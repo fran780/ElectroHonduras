@@ -99,11 +99,16 @@ class ProductosForm extends PrivateController
         if (Validators::IsEmpty($this->producto["productDescription"])) {
             $errors["productDescription_error"] = "La descripción es requerida";
         }
+        
         if ($this->producto["productPrice"] <= 0) {
             $errors["productPrice_error"] = "El precio debe ser mayor a cero";
         }
         if ($this->producto["productStock"] < 0) {
             $errors["productStock_error"] = "El stock no puede ser negativo";
+        }
+         $existingProduct = DaoProductos::getByName($this->producto["productName"]);
+        if ($existingProduct && intval($existingProduct["productId"]) !== $this->producto["productId"]) {
+            $errors["productName_error"] = "Ya existe un producto con este nombre";
         }
 
         foreach ($errors as $key => $msg) {

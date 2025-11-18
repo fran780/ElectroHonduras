@@ -19,8 +19,20 @@ class Productos extends Table
         );
     }
 
+    public static function getByName(string $productName)
+    {
+        return self::obtenerUnRegistro(
+            "SELECT * FROM electronics_products WHERE productName = :productName;",
+            ["productName" => $productName]
+        );
+    }
+
     public static function add($productName = null, $productDescription = null, $productPrice = null, $productImgUrl = null, $productStock = null, $productStatus = null)
     {
+        $existingProduct = self::getByName($productName);
+        if ($existingProduct) {
+            throw new \Exception("Ya existe un producto con este nombre");
+        }
         return self::executeNonQuery(
             "INSERT INTO electronics_products ( productName, productDescription, productPrice, productImgUrl, productStock, productStatus) VALUES (:productName, :productDescription, :productPrice, :productImgUrl, :productStock, :productStatus);",
             ["productName" => $productName, "productDescription" => $productDescription, "productPrice" => $productPrice, "productImgUrl" => $productImgUrl, "productStock" => $productStock, "productStatus" => $productStatus]
@@ -29,6 +41,10 @@ class Productos extends Table
 
     public static function update($productId = null, $productName = null, $productDescription = null, $productPrice = null, $productImgUrl = null, $productStock = null, $productStatus = null)
     {
+        $existingProduct = self::getByName($productName);
+        if ($existingProduct && intval($existingProduct["productId"]) !== intval($productId)) {
+            throw new \Exception("Ya existe un producto con este nombre");
+        }
         return self::executeNonQuery(
             "UPDATE electronics_products SET productName = :productName, productDescription = :productDescription, productPrice = :productPrice, productImgUrl = :productImgUrl, productStock = :productStock, productStatus = :productStatus WHERE productId = :productId;",
             ["productId" => $productId, "productName" => $productName, "productDescription" => $productDescription, "productPrice" => $productPrice, "productImgUrl" => $productImgUrl, "productStock" => $productStock, "productStatus" => $productStatus]

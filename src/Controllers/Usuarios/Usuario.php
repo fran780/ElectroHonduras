@@ -107,7 +107,8 @@ class Usuario extends PrivateController
         $errors = [];
         $this->usuario_xss_token = $_POST["usuario_xss_token"] ?? "";
         $this->usuario["usercod"] = intval($_POST["usercod"] ?? "");
-        $this->usuario["username"] = strval($_POST["username"] ?? "");
+        $this->usuario["username"] = trim(strval($_POST["username"] ?? ""));
+        $this->usuario["username"] = preg_replace('/\s+/', ' ', $this->usuario["username"]);
         $this->usuario["useremail"] = strval($_POST["useremail"] ?? "");
         $this->usuario["userest"] = strval($_POST["userest"] ?? "");
         $rolesInput = $_POST["roles"] ?? "";
@@ -140,10 +141,19 @@ class Usuario extends PrivateController
 
         if (Validators::IsEmpty($this->usuario["username"])) {
             $errors["username_error"] = "El nombre de usuario es requerido";
+        } elseif (!Validators::IsValidHumanName($this->usuario["username"])) {
+            $errors["username_error"] = "El nombre debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.";
         }
 
         if (Validators::IsEmpty($this->usuario["useremail"])) {
             $errors["useremail_error"] = "El correo del usuario es requerido";
+        } elseif (!Validators::IsValidEmail($this->usuario["useremail"])) {
+            $errors["useremail_error"] = "El correo del usuario no tiene un formato válido";
+        }
+
+        $existingUser = UsuariosDao::getUsuarioByEmail($this->usuario["useremail"]);
+        if ($existingUser && intval($existingUser["usercod"]) !== $this->usuario["usercod"]) {
+            $errors["useremail_error"] = "Ya existe un usuario con este correo";
         }
 
         if (!in_array($this->usuario["userest"], ["ACT", "INA"])) {

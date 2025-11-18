@@ -3,6 +3,7 @@
 namespace Dao\Usuarios;
 
 use Dao\Table;
+use Utilities\Validators;
 
 class Usuarios extends Table
 {
@@ -90,11 +91,26 @@ class Usuarios extends Table
         return self::obtenerUnRegistro($sqlstr, $params);
     }
 
-    public static function insertUsuario(
+    public static function getUsuarioByEmail(string $useremail)
+    {
+        $sqlstr = "SELECT usercod, username, useremail, userest FROM usuario WHERE useremail = :useremail";
+        $params = ["useremail" => $useremail];
+        return self::obtenerUnRegistro($sqlstr, $params);
+    }
+
+  public static function insertUsuario(
         string $username,
         string $useremail,
         string $userest
     ) {
+        $username = trim(preg_replace('/\s+/', ' ', $username));
+        if (!Validators::IsValidHumanName($username)) {
+            throw new \Exception("El nombre debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.");
+        }
+        $existingUser = self::getUsuarioByEmail($useremail);
+        if ($existingUser) {
+            throw new \Exception("El correo ya se encuentra registrado");
+        }
         $conn = self::getConn();
         $sqlstr = "INSERT INTO usuario (username, useremail, userest, userfching)
                     VALUES (:username, :useremail, :userest, NOW())";
@@ -113,6 +129,14 @@ class Usuarios extends Table
         string $useremail,
         string $userest
     ) {
+        $username = trim(preg_replace('/\s+/', ' ', $username));
+        if (!Validators::IsValidHumanName($username)) {
+            throw new \Exception("El nombre debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.");
+        }
+        $existingUser = self::getUsuarioByEmail($useremail);
+        if ($existingUser && intval($existingUser["usercod"]) !== $usercod) {
+            throw new \Exception("El correo ya se encuentra registrado");
+        }
         $sqlstr = "UPDATE usuario SET username = :username, useremail = :useremail,
                     userest = :userest WHERE usercod = :usercod";
         $params = [

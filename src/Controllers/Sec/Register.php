@@ -32,6 +32,13 @@ class Register extends PublicController
                 $this->errorEmail = "El correo no tiene el formato adecuado";
                 $this->hasErrors = true;
             }
+              if (
+                Validators::IsValidEmail($this->txtEmail) &&
+                \Dao\Security\Security::getUsuarioByEmail($this->txtEmail)
+            ) {
+                $this->errorEmail = "El correo ya se encuentra registrado";
+                $this->hasErrors = true;
+            }
             if (!Validators::IsValidPassword($this->txtPswd)) {
                 $this->errorPswd = "La contraseña debe tener al menos 8 caracteres una mayúscula, un número y un caracter especial.";
                 $this->hasErrors = true;

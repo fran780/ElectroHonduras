@@ -53,6 +53,9 @@ class Security extends \Dao\Table
         if (!\Utilities\Validators::IsValidEmail($email)) {
             throw new Exception("Correo no es válido");
         }
+         if (self::getUsuarioByEmail($email)) {
+            throw new Exception("El correo ya está registrado");
+        }
         if (!\Utilities\Validators::IsValidPassword($password)) {
             throw new Exception("Contraseña debe ser almenos 8 caracteres, 1 número, 1 mayúscula, 1 símbolo especial");
         }
