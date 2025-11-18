@@ -4,6 +4,7 @@
   </section>
 
   <section class="grid">
+
     <div class="row border-b header-row">
       <span class="col-1 center bold">#</span>
       <span class="col-4 center bold">Item</span>
@@ -13,11 +14,12 @@
     </div>
 
     {{foreach carretilla}}
-    <div class="row border-b">
-      <span class="col-1 center">{{row}}</span>
-      <span class="col-4 center">{{productName}}</span>
-      <span class="col-2 center">{{crrprc}}</span>
-      <span class="col-3 center">
+    <div class="row border-b cart-row">
+      <span class="col-1 center" data-label="#">{{row}}</span>
+      <span class="col-4 center" data-label="Item">{{productName}}</span>
+      <span class="col-2 center" data-label="Precio">{{crrprc}}</span>
+
+      <span class="col-3 center" data-label="Cantidad">
         <form action="index.php?page=Carretilla_Carretilla" method="post">
           <div class="quantity-controls">
             <input type="hidden" name="productId" value="{{productId}}" />
@@ -27,7 +29,8 @@
           </div>
         </form>
       </span>
-      <span class="col-2 center">{{subtotal}}</span>
+
+      <span class="col-2 center" data-label="Subtotal">{{subtotal}}</span>
     </div>
     {{endfor carretilla}}
 
@@ -82,39 +85,16 @@
   }
 
   /* Columnas */
-  .col-1 {
-    flex: 1;
-  }
+  .col-1 { flex: 1; }
+  .col-2 { flex: 2; }
+  .col-3 { flex: 3; }
+  .col-4 { flex: 4; }
+  .col-10 { flex: 10; }
 
-  .col-2 {
-    flex: 2;
-  }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .bold { font-weight: bold; }
 
-  .col-3 {
-    flex: 3;
-  }
-
-  .col-4 {
-    flex: 4;
-  }
-
-  .col-12 {
-    flex: 12;
-  }
-
-  .offset-7 {
-    margin-left: auto;
-  }
-
-  .center {
-    text-align: center;
-  }
-
-  .right {
-    text-align: right;
-  }
-
-  
   .circle {
     background-color: #007bff;
     color: white;
@@ -149,13 +129,6 @@
     text-align: center;
   }
 
-
-  .row:last-of-type span {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-
   .checkout-btn-container {
     display: flex;
     justify-content: flex-end;
@@ -181,7 +154,83 @@
     background-color: #218838;
   }
 
-  .bold {
-  font-weight: bold;
-}
+  /*  RESPONSIVE  */
+
+  /* 1024: solo un poco menos de padding */
+  @media (max-width: 1024px) {
+    .container-l {
+      padding: 1.25rem;
+    }
+
+    .depth-4 h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  /* 768 y abajo: misma tabla, pero con scroll horizontal */
+  @media (max-width: 768px) {
+    .container-l {
+      padding: 1rem 0.5rem;
+    }
+
+    .grid {
+      overflow-x: auto;
+    }
+
+    .row {
+      min-width: 600px;
+    }
+
+    .checkout-btn-container {
+      justify-content: center;
+      margin-top: 0.75rem;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* 425 */
+  @media (max-width: 425px) {
+    .row {
+      min-width: 580px;
+      padding: 0.7rem;
+    }
+
+    .depth-4 h1 {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* 375 */
+  @media (max-width: 375px) {
+    .row {
+      min-width: 560px;
+      padding: 0.65rem;
+    }
+
+    .depth-4 h1 {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* 320 */
+  @media (max-width: 320px) {
+    .row {
+      min-width: 540px;
+      padding: 0.6rem;
+    }
+
+    .depth-4 h1 {
+      font-size: 1.2rem;
+    }
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+    }
+  }
 </style>

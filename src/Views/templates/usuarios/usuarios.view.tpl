@@ -82,10 +82,13 @@
                 <th class="left">Roles</th>
 
                 <th>Estado</th>
-                <th>Acciones
+                <th>
+                    Acciones
+                    <!-- Botón NUEVO de escritorio: NO se toca -->
                     <div style="position:relative; height:0;">
-                        <button type="button" onclick="window.location.href='index.php?page=Usuarios_Usuario&mode=INS'"
-                            style="position:absolute; top:-113px; left:50%; transform:translateX(-50%);">
+                        <button type="button"
+                            onclick="window.location.href='index.php?page=Usuarios_Usuario&mode=INS'"
+                            style="position:absolute; top:-118px; left:50%; transform:translateX(-50%);">
                             Nuevo
                         </button>
                     </div>
@@ -116,5 +119,131 @@
             {{endfor usuarios}}
         </tbody>
     </table>
+
+    <!-- Botón NUEVO solo para pantallas pequeñas -->
+    <div class="nuevo-mobile">
+        <button type="button"
+            onclick="window.location.href='index.php?page=Usuarios_Usuario&mode=INS'">
+            Nuevo
+        </button>
+    </div>
+
     {{pagination}}
 </section>
+
+
+<style>
+/* Por defecto: ocultar botón Celular */
+.nuevo-mobile {
+  display: none;
+}
+
+/*  TABLET Y Celulares: FORM VERTICAL y TABLA SCROLL  */
+@media (max-width: 768px) {
+
+  /* Un poco de padding lateral */
+  .grid,
+  .WWList {
+    padding: 0 0.75rem;
+  }
+
+  /*  FORMULARIO DE FILTROS  */
+  .grid .row form {
+    width: 100%;
+  }
+
+  /* Contenedor principal en columna */
+  .grid .row form .flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  /* Bloques de campos  a 100% */
+  .grid .row form .col-8,
+  .grid .row form .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .grid .row form .col-8.row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  /* Labels y campos en columna, a todo el ancho */
+  .grid .row form .col-8.row label,
+  .grid .row form .col-8.row input,
+  .grid .row form .col-8.row select {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+  }
+
+  .grid .row form .col-8.row label {
+    margin-bottom: 0.15rem;
+    font-weight: 600;
+  }
+
+  /* Botón Filtrar full width */
+  .grid .row form .col-4.align-end {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .grid .row form .col-4.align-end button,
+  .grid .row form button[type="submit"] {
+    width: 100% !important;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /*  TABLA CON SCROLL HORIZONTAL  */
+  .WWList {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .WWList table {
+    min-width: 700px;   
+  }
+
+  /*  BOTÓN NUEVO Celular  */
+  .nuevo-mobile {
+    display: block;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .nuevo-mobile button {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+}
+
+/* 320px */
+@media (max-width: 320px) {
+  .grid,
+  .WWList {
+    padding: 0 0.5rem;
+  }
+
+  .grid .row form .col-4.align-end button,
+  .grid .row form button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.45rem 0.4rem;
+  }
+
+  .WWList table {
+    min-width: 640px;
+  }
+
+  .nuevo-mobile button {
+    font-size: 0.95rem;
+  }
+}
+</style>

@@ -67,18 +67,14 @@
 
     {{endwith usuario}}
 
-    <div class="row my-4 align-center flex-end">
+    <div class="row my-4 align-center flex-end form-actions">
       {{if showCommitBtn}}
       <button class="primary col-12 col-m-2" type="submit" name="btnConfirmar">Confirmar</button>
       &nbsp;
       {{endif showCommitBtn}}
       <button class="col-12 col-m-2" type="button" id="btnCancelar">
-        {{if showCommitBtn}}
-        Cancelar
-        {{endif showCommitBtn}}
-        {{ifnot showCommitBtn}}
-        Regresar
-        {{endifnot showCommitBtn}}
+        {{if showCommitBtn}}Cancelar{{endif showCommitBtn}}
+        {{ifnot showCommitBtn}}Regresar{{endifnot showCommitBtn}}
       </button>
     </div>
   </form>
@@ -94,3 +90,25 @@
     });
   });
 </script>
+
+<style>
+/* SOLO TABLET */
+@media (min-width: 600px) and (max-width: 1199px) {
+
+  /* En tablet queremos que los botones estén en fila */
+  .form-actions {
+    display: flex;
+    flex-direction: row;         
+    justify-content: flex-end;  
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .form-actions button {
+    width: auto;        
+    max-width: none;
+    padding: 0.7rem 1rem;
+    white-space: nowrap;
+  }
+}
+</style>

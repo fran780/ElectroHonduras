@@ -62,7 +62,7 @@
 
         {{endwith producto}}
 
-        <div class="row my-4 align-center flex-end">
+        <div class="row my-4 align-center flex-end form-actions">
             {{if showCommitBtn}}
             <button class="primary col-12 col-m-2" type="submit" name="btnConfirmar">Confirmar</button>
             &nbsp;
@@ -85,3 +85,41 @@
         });
     });
 </script>
+
+<style>
+/*  TELÉFONO Y TABLET  */
+@media (max-width: 1024px) {
+
+  .container-m {
+    padding: 0 0.75rem;
+  }
+
+  /* Labels e inputs a todo el ancho en celulares/tablet */
+  form .row label,
+  form .row input,
+  form .row select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Contenedor de botones */
+  .form-actions {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Botones: que crezcan en alto y no corten el texto */
+  .form-actions button {
+    width: 100%;
+    max-width: 260px;            
+    box-sizing: border-box;
+    height: auto;                
+    line-height: 1.2;            
+    padding: 0.7rem 1rem;        
+    white-space: nowrap;
+  }
+}
+</style>

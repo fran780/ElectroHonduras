@@ -132,4 +132,52 @@
         background-color: #f9f9f9;
         font-weight: bold;
     }
+
+    /*  Celular Y TABLET  */
+@media (max-width: 1024px) {
+
+  /* Contenedor del botón Regresar */
+  section .align-end {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+  }
+
+  /* Botón Regresar responsive */
+  #btnCancelar {
+    width: 100%;
+    max-width: 260px;          
+    box-sizing: border-box;
+    padding: 0.7rem 1rem;
+    line-height: 1.2;
+    white-space: nowrap;       
+  }
+}
+
+/* Mejora en las vistas para Celulares de la tabla de productos */
+@media (max-width: 600px) {
+
+  .WWList {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-left: 2px solid #eee;
+    border-right: 2px solid #eee;
+    scroll-snap-type: x mandatory;
+  }
+
+  .WWList table {
+    min-width: 650px;
+    scroll-snap-align: start;
+  }
+
+  .WWList::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .WWList::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+}
+
 </style>

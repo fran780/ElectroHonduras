@@ -36,12 +36,15 @@
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Estado</th>
-                <th> Acciones
+
+                <th>
+                    Acciones
+
                     {{if ~product_INS}}
-                    <div style="position:relative; height:0;">
-                        <button type="button"
-                            onclick="window.location.href='index.php?page=Productos_ProductosForm&mode=INS'"
-                            style="position:absolute; top:-100px; left:50%; transform:translateX(-50%);">
+                    <!-- Botón de escritorio -->
+                    <div class="nuevo-desktop-wrapper">
+                        <button type="button" class="btn-nuevo-desktop"
+                            onclick="window.location.href='index.php?page=Productos_ProductosForm&mode=INS'">
                             Nuevo
                         </button>
                     </div>
@@ -49,11 +52,13 @@
                 </th>
             </tr>
         </thead>
+
         <tbody>
             {{foreach productos}}
             <tr>
                 <td class="center">
-                    <img src="{{productImgUrl}}" alt="imagen" style="width: 64px; height: 64px; object-fit: cover;">
+                    <img src="{{productImgUrl}}" alt="imagen"
+                        style="width: 64px; height: 64px; object-fit: cover;">
                 </td>
                 <td class="center">{{productId}}</td>
                 <td class="center">{{productName}}</td>
@@ -65,9 +70,11 @@
                     {{if ~product_DSP}}
                     <a href="index.php?page=Productos_ProductosForm&mode=DSP&productId={{productId}}">Ver</a>
                     {{endif ~product_DSP}}
+
                     {{if ~product_UPD}}
                     &nbsp;<a href="index.php?page=Productos_ProductosForm&mode=UPD&productId={{productId}}">Editar</a>
                     {{endif ~product_UPD}}
+
                     {{if ~product_DEL}}
                     &nbsp;<a href="index.php?page=Productos_ProductosForm&mode=DEL&productId={{productId}}">Eliminar</a>
                     {{endif ~product_DEL}}
@@ -76,5 +83,101 @@
             {{endfor productos}}
         </tbody>
     </table>
+
+    <!-- Botón Celular -->
+    {{if ~product_INS}}
+    <div class="nuevo-mobile">
+        <button type="button"
+            onclick="window.location.href='index.php?page=Productos_ProductosForm&mode=INS'">
+            Nuevo
+        </button>
+    </div>
+    {{endif ~product_INS}}
+
     {{pagination}}
 </section>
+
+<style>
+
+/* NUEVO BOTÓN DE ESCRITORIO */
+.nuevo-desktop-wrapper {
+    position: relative;
+    height: 0;
+}
+
+.btn-nuevo-desktop {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Ocultar botón de escritorio en celular */
+@media (max-width: 768px) {
+    .btn-nuevo-desktop {
+        display: none;
+    }
+}
+
+/* BOTÓN CELULAR*/
+.nuevo-mobile button {
+    width: 100%
+}
+
+/* Ocultar en escritorio */
+.nuevo-mobile {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .grid,
+    .WWList {
+        padding: 0 0.75rem;
+    }
+
+    .grid .row form .flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .grid .row form .col-8,
+    .grid .row form .col-4 {
+        max-width: 100%;
+        flex: 100%;
+    }
+
+    .grid .row form .col-8.row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .grid .row form .col-4.align-end button {
+        width: 100%;
+    }
+
+    .WWList {
+        overflow-x: auto;
+    }
+
+    .WWList table {
+        min-width: 700px;
+    }
+
+    /* Mostrar botón Celular */
+    .nuevo-mobile {
+        display: block;
+        margin-top: 1rem;
+    }
+}
+
+/* 320px */
+@media (max-width: 320px) {
+    .nuevo-mobile button {
+        font-size: 0.9rem;
+        padding: 0.65rem;
+    }
+}
+
+</style>
