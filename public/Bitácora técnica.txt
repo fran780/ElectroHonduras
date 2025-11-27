@@ -81,3 +81,15 @@ Tras la culminación del Sprint 7, se realizaron mejoras funcionales y pequeños
 - Actualización en el registro de clientes: se habilitó la captura de nombre y apellido con validaciones adicionales para garantizar la integridad de los datos.
 
 - Ampliación del historial de compras: se incorporó el campo de productos en el detalle de cada orden, incluyendo una tabla resumen con los artículos adquiridos por el cliente.
+
+5. Sprint 8 - Scrum Master: Ana Zelaya
+
+Durante este sprint se realizaron los ajustes finales del sistema ElectroHonduras antes de su despliegue oficial. El objetivo principal fue optimizar los módulos ya implementados, mejorar la experiencia visual en diferentes dispositivos, corregir mensajes de validación y asegurar el funcionamiento estable del sistema en ambiente web. Además, se efectuó el proceso completo de publicación en el hosting InfinityFree, preparando el proyecto para su uso y su presentación final.
+
+5.1. Desarrollo de tareas del Sprint 8
+
+5.1.1. Mejoras finales del sistema (17 al 18 de noviembre)
+Héctor Palacios fue el encargado de aplicar los últimos ajustes en todos los módulos del sistema. Se revisaron las pantallas principales, se ajustó el diseño responsive para dispositivos móviles y tablet, y se reemplazaron mensajes de error técnicos por mensajes claros y controlados. También se agregaron validaciones para campos requeridos y formatos específicos, además de realizar pruebas con datos inválidos para confirmar que los mensajes se mostraran correctamente. Estas mejoras garantizan una experiencia más profesional, estable y entendible para el usuario final.
+
+5.1.2. Subir el sistema al hosting InfinityFree (18 al 22 de noviembre)
+Francisco Fernández llevó a cabo el despliegue completo del sistema en el hosting InfinityFree. Esto incluyó la creación del panel de control, configuración de la base de datos remota, subida de archivos mediante FTP y actualización de credenciales y rutas internas del proyecto. Finalmente, se probó el funcionamiento general en el entorno web, verificando que todas las funciones operaran de forma correcta y que el acceso público fuera estable desde cualquier dispositivo, con esto, el sistema quedó oficialmente disponible en línea.
