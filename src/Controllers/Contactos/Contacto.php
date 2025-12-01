@@ -41,10 +41,10 @@ class Contacto extends PublicController
     private function mapFormData(): void
     {
         $this->xssToken = $_POST["xssToken"] ?? "";
-        $this->formData["txtNombre"] = $_POST["txtNombre"] ?? "";
-        $this->formData["txtApellido"] = $_POST["txtApellido"] ?? "";
-        $this->formData["txtCorreo"] = $_POST["txtCorreo"] ?? "";
-        $this->formData["txtTelefono"] = $_POST["txtTelefono"] ?? "";
+        $this->formData["txtNombre"] = preg_replace('/\s+/', ' ', trim($_POST["txtNombre"] ?? ""));
+        $this->formData["txtApellido"] = preg_replace('/\s+/', ' ', trim($_POST["txtApellido"] ?? ""));
+        $this->formData["txtCorreo"] = trim($_POST["txtCorreo"] ?? "");
+        $this->formData["txtTelefono"] = trim($_POST["txtTelefono"] ?? "");
         $this->formData["txtMen"] = $_POST["txtMen"] ?? "";
     }
 
@@ -52,15 +52,20 @@ class Contacto extends PublicController
     {
         if (Validators::IsEmpty($this->formData["txtNombre"])) {
             $this->errors["txtNombre_error"] = "El nombre es obligatorio.";
+        } elseif (!Validators::IsValidHumanName($this->formData["txtNombre"])) {
+            $this->errors["txtNombre_error"] = "El nombre debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.";
         }
 
         if (Validators::IsEmpty($this->formData["txtApellido"])) {
             $this->errors["txtApellido_error"] = "El apellido es obligatorio.";
+        } elseif (!Validators::IsValidHumanName($this->formData["txtApellido"])) {
+            $this->errors["txtApellido_error"] = "El apellido debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.";
         }
 
         if (!Validators::IsValidEmail($this->formData["txtCorreo"])) {
-            $this->errors["txtCorreo_error"] = "Correo inválido.";
+            $this->errors["txtCorreo_error"] = "El correo no tiene el formato adecuado";
         }
+
 
         if (!Validators::IsValidHonduranCelPhone($this->formData["txtTelefono"])) {
             $this->errors["txtTelefono_error"] = "Teléfono inválido (ej: 1234-5678).";

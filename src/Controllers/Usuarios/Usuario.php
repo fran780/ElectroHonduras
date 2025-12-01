@@ -110,9 +110,14 @@ class Usuario extends PrivateController
         $this->usuario["username"] = trim(strval($_POST["username"] ?? ""));
         $this->usuario["username"] = preg_replace('/\s+/', ' ', $this->usuario["username"]);
         $this->usuario["useremail"] = strval($_POST["useremail"] ?? "");
+        $currentUserStatus = $this->usuario["userest"] ?? "";
         $this->usuario["userest"] = strval($_POST["userest"] ?? "");
+        if ($this->mode === "UPD" && $this->usuario["userest"] === "" && $currentUserStatus !== "") {
+            $this->usuario["userest"] = $currentUserStatus;
+        }
         $rolesInput = $_POST["roles"] ?? "";
         $rolesErrors = [];
+        $statusErrors = [];
 
         if (is_array($rolesInput)) {
             $rolesInput = array_values(array_filter(array_map("strval", $rolesInput)));
@@ -137,6 +142,10 @@ class Usuario extends PrivateController
                 $rolesErrors[] = "Su cuenta debe conservar el rol Administrador";
                 $this->roles = ["ADMIN"];
             }
+            if ($this->usuario["userest"] !== "ACT") {
+                $statusErrors[] = "No puede inactivar su propia cuenta de Administrador";
+                $this->usuario["userest"] = "ACT";
+            }
         }
 
         if (Validators::IsEmpty($this->usuario["username"])) {
@@ -158,6 +167,8 @@ class Usuario extends PrivateController
 
         if (!in_array($this->usuario["userest"], ["ACT", "INA"])) {
             $errors["userest_error"] = "El estado del usuario es inválido";
+        } elseif (!empty($statusErrors)) {
+            $errors["userest_error"] = implode(". ", array_unique($statusErrors));
         }
 
         if (empty($rolesErrors) && count($validRoles) > 0 && count($this->roles) === 0) {
@@ -271,6 +282,7 @@ class Usuario extends PrivateController
 
         $disableRoles = ($this->mode === "DSP" || $this->mode === "DEL");
         $lockAdminRole = $this->isEditingSelf && in_array("ADMIN", $this->originalRoles);
+        $lockAdminStatus = $lockAdminRole;
         $rolesForView = array_map(function ($role) use ($disableRoles, $lockAdminRole) {
             $shouldDisable = $disableRoles || ($lockAdminRole && $role["rolescod"] !== "ADMIN");
             return [
@@ -282,6 +294,7 @@ class Usuario extends PrivateController
         }, $this->availableRoles);
 
         $this->viewData["roles"] = $rolesForView;
+        $this->viewData["userestDisabledAttr"] = ($disableRoles || $lockAdminStatus) ? "disabled" : "";
         $this->viewData["hasRoles"] = count($rolesForView) > 0;
         if ($this->rolesError !== "") {
             $this->viewData["roles_error"] = $this->rolesError;

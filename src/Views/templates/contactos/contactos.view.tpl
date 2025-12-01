@@ -68,14 +68,10 @@
       </div>
     </div>
 
-     <div class="map">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.3344019714295!2d-87.9701093596203!3d14.693671685862853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65c7022b4b15f7%3A0x13944ff6de5370b8!2sTaulab%C3%A9%2C%20Comayagua!5e0!3m2!1sen!2shn!4v1753660913549!5m2!1sen!2shn" 
-        width="100%"  
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.3344019714295!2d-87.9701093596203!3d14.693671685862853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65c7022b4b15f7%3A0x13944ff6de5370b8!2sTaulab%C3%A9%2C%20Comayagua!5e0!3m2!1sen!2shn!4v1753660913549!5m2!1sen!2shn"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -100,7 +96,13 @@
       const contactForm = document.getElementById("contactForm");
 
       const isEmpty = /^\s*$/;
-      const isValidEmail = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+      const isValidEmail = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
+      const isValidHumanName = (value) => {
+        if (isEmpty.test(value)) return false;
+        const trimmed = value.trim();
+        if (trimmed.length < 3 || trimmed.length > 60) return false;
+        return /^[\p{L}]+(?:[ \-'][\p{L}]+)*$/u.test(trimmed);
+      };
       const isValidHonduranCelPhone = /^\+?\(?(504)?\)?\s?[389]\d{3}[\-\s]?\d{4}$/;
 
       btnProcesar.addEventListener("click", (e) => {
@@ -109,18 +111,18 @@
 
         let hasErrors = false;
 
-        if (isEmpty.test(txtNombre.value)) {
-          alert("Error: El Nombre no es válido");
+        if (!isValidHumanName(txtNombre.value)) {
+          alert("Error: El nombre debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.");
           hasErrors = true;
         }
 
-        if (isEmpty.test(txtApellido.value)) {
-          alert("Error: El Apellido no es válido");
+        if (!isValidHumanName(txtApellido.value)) {
+          alert("Error: El apellido debe tener al menos 3 letras y solo puede incluir letras, espacios, guiones o apóstrofes.");
           hasErrors = true;
         }
 
         if (!isValidEmail.test(txtCorreo.value)) {
-          alert("Error: El Correo no es válido");
+          alert("Error: El correo no tiene el formato adecuado");
           hasErrors = true;
         }
 

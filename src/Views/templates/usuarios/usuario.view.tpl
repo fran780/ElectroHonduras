@@ -36,7 +36,8 @@
 
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="userest">Estado</label>
-      <select name="userest" id="userest" class="col-12 col-m-9" {{if ~readonly}} readonly disabled {{endif ~readonly}}>
+      <select name="userest" id="userest" class="col-12 col-m-9" {{if ~readonly}} readonly disabled {{endif ~readonly}}
+        {{~userestDisabledAttr}}>
         <option value="ACT" {{userest_act}}>Activo</option>
         <option value="INA" {{userest_ina}}>Inactivo</option>
       </select>
@@ -92,23 +93,23 @@
 </script>
 
 <style>
-/* SOLO TABLET */
-@media (min-width: 600px) and (max-width: 1199px) {
+  /* SOLO TABLET */
+  @media (min-width: 600px) and (max-width: 1199px) {
 
-  /* En tablet queremos que los botones estén en fila */
-  .form-actions {
-    display: flex;
-    flex-direction: row;         
-    justify-content: flex-end;  
-    align-items: center;
-    gap: 0.5rem;
-  }
+    /* En tablet queremos que los botones estén en fila */
+    .form-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-  .form-actions button {
-    width: auto;        
-    max-width: none;
-    padding: 0.7rem 1rem;
-    white-space: nowrap;
+    .form-actions button {
+      width: auto;
+      max-width: none;
+      padding: 0.7rem 1rem;
+      white-space: nowrap;
+    }
   }
-}
 </style>
