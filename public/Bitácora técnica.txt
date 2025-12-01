@@ -72,7 +72,7 @@ Héctor Palacios diseñó el módulo que permite a los usuarios registrados visu
 4.1.5. Crear pantalla de Factura (6 al 7 de noviembre)
 Héctor Palacios desarrolló la pantalla de factura, donde se muestran los datos detallados de cada compra realizada. La vista incluye el número de orden, nombre del cliente, correo, fecha, comisión, monto neto y total. Además, se añadió la opción para imprimir o descargar la factura en formato PDF, verificando la correcta correspondencia con el pedido confirmado y la compatibilidad del formato en diferentes navegadores.
 
-5. Actualizaciones para mejorar el proyecto.
+4.1.6 Actualizaciones para mejorar el proyecto.
 
 Tras la culminación del Sprint 7, se realizaron mejoras funcionales y pequeños ajustes dentro de los módulos ya desarrollados. Las mejoras son las siguientes:
 
@@ -93,3 +93,22 @@ Héctor Palacios fue el encargado de aplicar los últimos ajustes en todos los m
 
 5.1.2. Subir el sistema al hosting InfinityFree (18 al 22 de noviembre)
 Francisco Fernández llevó a cabo el despliegue completo del sistema en el hosting InfinityFree. Esto incluyó la creación del panel de control, configuración de la base de datos remota, subida de archivos mediante FTP y actualización de credenciales y rutas internas del proyecto. Finalmente, se probó el funcionamiento general en el entorno web, verificando que todas las funciones operaran de forma correcta y que el acceso público fuera estable desde cualquier dispositivo, con esto, el sistema quedó oficialmente disponible en línea.
+
+6. Sprint 9 – Scrum Master: Klardy Cruz
+
+Durante este sprint se realizaron todas las pruebas finales del sistema, con el propósito de asegurar que cada módulo funcionara correctamente tanto de forma individual como en conjunto. Además, se verificó que el flujo completo de compra, registro, carretilla, checkout y administración operara sin errores, garantizando que el sistema estuviera completamente estable y listo para su entrega final.
+
+6.1. Desarrollo de tareas del Sprint 9
+
+6.1.1. Pruebas funcionales del sistema (24 al 26 de noviembre)
+Guillermo Ortega ejecutó las pruebas funcionales de todos los módulos del sistema, verificando que operaciones esenciales como crear, editar, eliminar, consultar, filtrar y navegar funcionaran correctamente. Se evaluó el comportamiento de los botones y formularios, la validación de búsquedas, la paginación y la navegación general del sistema. Finalmente, se documentaron los resultados con capturas como evidencia de cada caso probado.
+
+6.1.2. Pruebas de integración general (26 al 28 de noviembre)
+En esta fase nuevamente Guillermo Ortega se encargo de evaluar que todos los módulos trabajaran correctamente entre sí, ejecutando flujos completos desde el registro y login hasta la compra, movimiento del carrito, historial y administración. Se verificó que la interacción entre roles, permisos y funcionalidades fuera coherente y fluida, sin romper la lógica del sistema. Los resultados fueron registrados en un documento PDF con cada prueba evidenciada.
+
+6.1.3. Pruebas de validación de entradas (28 al 29 de noviembre)
+Héctor Palacios validó el manejo adecuado de errores del sistema, comprobando que los mensajes de validación aparecieran de forma clara ante entradas inválidas como campos vacíos, formatos incorrectos, valores negativos, correos mal formados o inicios de sesión incorrectos. Se verificó que el sistema rechazara correctamente los datos incorrectos y mantuviera un comportamiento seguro y controlado. Todas las pruebas fueron documentadas con capturas de pantalla.
+
+6.1.4. Observaciones detectadas y correcciones aplicadas (30 de noviembre)
+Durante las pruebas de validación de entradas realizadas el 29 de noviembre de 2025, Alejandro Palacios identificó varios errores importantes que persistían en el sistema. Entre las incidencias reportadas se encontraba que el módulo de Contáctanos permitía ingresar nombres y apellidos con números, además de aceptar correos electrónicos en formatos inválidos sin generar advertencias. Asimismo, se detectó un fallo crítico dentro del módulo de Gestión de Usuarios, donde un administrador tenía la posibilidad de modificar su propio estado (activo/inactivo), situación que podía ocasionar la pérdida de acceso al sistema y afectar la operatividad administrativa.
+El 30 de noviembre de 2025 se llevaron a cabo las correcciones correspondientes, esto lo hizo Francisco Fernández. Donde reforzó las validaciones del formulario de Contáctanos, asegurando que los campos de nombre y apellido solo aceptaran caracteres permitidos, que el formato del correo fuera estrictamente correcto y que los mensajes de error fueran claros y visibles para el usuario. En cuanto al módulo de Gestión de Usuarios, se bloqueó el campo Estado cuando un administrador edita su propia cuenta, impidiendo que pueda desactivarse accidentalmente. Todas estas correcciones fueron implementadas tanto en el repositorio de GitHub como en la versión desplegada en InfinityFree, verificando su funcionamiento mediante nuevas pruebas.
