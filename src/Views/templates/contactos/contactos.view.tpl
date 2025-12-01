@@ -68,14 +68,17 @@
       </div>
     </div>
 
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.3344019714295!2d-87.9701093596203!3d14.693671685862853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65c7022b4b15f7%3A0x13944ff6de5370b8!2sTaulab%C3%A9%2C%20Comayagua!5e0!3m2!1sen!2shn!4v1753660913549!5m2!1sen!2shn"
-        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+      <div class="map">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.3344019714295!2d-87.9701093596203!3d14.693671685862853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65c7022b4b15f7%3A0x13944ff6de5370b8!2sTaulab%C3%A9%2C%20Comayagua!5e0!3m2!1sen!2shn!4v1753660913549!5m2!1sen!2shn" 
+        width="100%"  
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
-  </div>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
