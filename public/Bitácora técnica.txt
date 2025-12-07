@@ -1,114 +1,157 @@
 Bitácora técnica 
 
-1. Sprint 4 - Scrum Master: Ana Zelaya
+1. Sprint 1 - Scrum Master: Klardy Cruz
+En este primer sprint nos enfocamos en dejar completamente definido el proyecto ElectroHonduras, asegurando que todos tuviéramos la misma idea de lo que se iba a construir y cómo debía funcionar. Esto parte desde definir el propósito del sistema, identificar a los actores que participarían, definir las funcionalidades principales y documentar los requisitos necesarios para guiar el desarrollo desde el inicio.
+
+1.1. Desarrollo de tareas del Sprint 1
+
+1.1.1. Definición del Proyecto (23 al 24 de septiembre)
+En esta tarea Francisco Fernández preparó una descripción clara y sencilla del sistema web de comercio electrónico, explicando su propósito, alcance y funcionamiento general. La definición fue revisada y validada por el equipo para asegurar que todos comprendieran la finalidad del proyecto y los objetivos que se buscaban alcanzar.
+
+1.1.2. Análisis de Requerimientos (25 al 28 de septiembre)
+Durante esta actividad Francisco Fernández identificó los roles principales del sistema, se detallaron los módulos que lo conformarían y se redactaron las funcionalidades base. Además, se documentaron los requisitos funcionales y no funcionales, organizando toda la información necesaria para orientar el desarrollo. Esta etapa permitió establecer un enfoque completo del sistema.
+
+2. Sprint 2 – Scrum Master: Guillermo Ortega
+Durante este sprint se trabajó en la definición de la arquitectura tecnológica del proyecto y en la elaboración del diagrama de navegación del sistema. El propósito principal fue establecer las bases técnicas y visuales que permitirían guiar la construcción del sistema ElectroHonduras en los siguientes sprints, tomando decisiones fundamentadas sobre las herramientas a utilizar y aclarando el recorrido de los usuarios dentro del sistema.
+
+2.1. Desarrollo de tareas del Sprint 2
+
+2.1.1. Definir arquitectura tecnológica (29 al 30 de septiembre)
+Francisco Fernández se encargó de analizar las diferentes opciones tecnológicas disponibles para el desarrollo del sistema, evaluando sus características, requerimientos y compatibilidad con los conocimientos del equipo. Posteriormente, se seleccionó la arquitectura más viable, considerando criterios como eficiencia, facilidad de mantenimiento y soporte futuro. Finalmente, documentó la estructura tecnológica elegida, detallando los componentes y herramientas que formarían parte del proyecto.
+
+2.1.2. Elaborar diagrama de navegación (1 al 5 de octubre)
+Héctor Palacios desarrolló el diagrama de navegación general del sistema, identificando todas las pantallas necesarias y organizando cómo se relacionan entre sí según los flujos establecidos para cada rol. De tal manera que se pudiera visualizar de forma clara el recorrido del usuario dentro del sistema, desde las pantallas públicas hasta las áreas internas. Una vez finalizado, el diagrama fue revisado y validado junto al equipo para asegurar coherencia y que todos los módulos estuvieran correctamente representados.
+
+3. Sprint 3 – Scrum Master: Héctor Palacios
+En este sprint el enfoque del equipo estuvo en construir la base conceptual y visual del sistema antes de iniciar la programación. En esta etapa se elaboró el diccionario de datos, se diseñaron los prototipos de pantallas y se desarrollaron los diagramas de actividades, con el fin de dejar completamente definido el funcionamiento interno del sistema y el flujo de acciones dentro de cada módulo. 
+
+3.1. Desarrollo de tareas del Sprint 3
+
+3.1.1. Crear prototipos de pantallas (6 al 12 de octubre)
+Ana Zelaya y Klardy Cruz se encargaron de diseñar los prototipos principales del sistema, elaborando las pantallas base que representarían la interfaz final. Definieron la estructura visual, distribución de elementos y funcionalidades esperadas, basándose directamente en los requisitos recopilados en los sprints anteriores. Estos prototipos permitieron visualizar de forma temprana cómo luciría la aplicación y facilitaron la validación del diseño con el resto del equipo.
+
+3.1.2. Construir el diccionario de datos (6 al 12 de octubre)
+Guillermo Ortega elaboró el diccionario de datos del sistema, documentando las tablas, los campos, los tipos de datos y las relaciones principales entre entidades. Esta información dejó establecida la base técnica que usaría la programación y permitió garantizar que todas las estructuras de datos fueran coherentes, completas y alineadas con los módulos planificados.
+
+3.1.3. Elaborar diagramas de actividades de los módulos principales (8 al 12 de octubre)
+Francisco Fernández y Guillermo Ortega desarrollaron los diagramas de actividades, representando paso a paso el flujo de acciones de los módulos clave como registro, autenticación, gestión de productos, carretilla de compras y generación de órdenes. Estos diagramas ayudaron a visualizar cómo interactúan los usuarios con el sistema y cómo se ejecutan las decisiones internas, garantizando que el funcionamiento estuviera alineado con los requisitos definidos en el análisis previo.
+
+4. Sprint 4 - Scrum Master: Ana Zelaya
 Durante este sprint se estableció la base técnica del sistema ElectroHonduras, el objetivo principal fue instalar y configurar el framework MVC, crear la base de datos del sistema, y verificar que todos los entornos locales funcionaran correctamente, garantizando que cada integrante del equipo pudiera trabajar con la misma estructura.
 
-1.1. Desarrollo de tareas del Sprint 4
+4.1. Desarrollo de tareas del Sprint 4
 
-1.1.1. Instalación del Framework y Verificación de Pantallas (13–16 de octubre)
+4.1.1. Instalación del Framework y Verificación de Pantallas (13 al 16 de octubre)
 Esta tarea fue grupal y requerida para todos los miembros del equipo, ya que cada uno debía tener su entorno de desarrollo completamente funcional antes de avanzar con los módulos específicos. El proceso comenzó con la descarga del framework MVC propuesto para el proyecto, seguido de su instalación y configuración dentro del entorno local de cada integrante. Se verificaron las rutas, dependencias y el correcto enlace con el servidor local XAMPP.
 Ana Zelaya, como Scrum Master, verificó la correcta instalación en cada equipo y marcó el checklist de finalización en Trello, confirmando que todos los entornos estuvieran sincronizados.
 
-1.1.2. Creación de la Base de Datos (16–18 de octubre)
+4.1.2. Creación de la Base de Datos (16 al 18 de octubre)
 Esta tarea fue desarrollada por Francisco Fernández, quien se encargó de levantar la base de datos del sistema de acuerdo con el diccionario de datos establecido. El trabajo consistió en definir las tablas principales, relaciones entre entidades, llaves primarias y foráneas, y establecer la conexión con el entorno local. 
 
-2. Sprint 5 - Scrum Master: Francisco Fernández
+5. Sprint 5 - Scrum Master: Francisco Fernández
 Durante el Sprint 5, el equipo se enfocó en establecer la base funcional del sistema, conectando la interfaz con la base de datos y configurando los primeros módulos operativos. El objetivo principal fue lograr que el sistema pudiera mostrar productos activos en la página principal, gestionar la carga de datos iniciales y permitir el registro automático de usuarios dentro de la base de datos, garantizando la coherencia entre frontend y backend.
 
-2.1. Desarrollo de tareas del Sprint 5 
+5.1. Desarrollo de tareas del Sprint 5 
 
-2.1.1. Cargar datos iniciales a la base de datos (Usuarios y Productos) – 20 al 21 de octubre
+5.1.1. Cargar datos iniciales a la base de datos (Usuarios y Productos) – 20 al 21 de octubre
 Esta tarea consistió en preparar la base de datos con la información necesaria para probar el funcionamiento del sistema y realizar las primeras pruebas visuales. Klardy Cruz se encargó de insertar los roles base del sistema (Administrador, Encargado de Inventario y Cliente), así como de crear usuarios de prueba asociados a cada rol. Además, se insertaron los productos activos con sus imágenes, precios y niveles de stock, permitiendo validar el correcto despliegue en la interfaz.
 
-2.1.2. Catálogo en la Página Principal (Visualización de Productos) – 22 al 24 de octubre
+5.1.2. Catálogo en la Página Principal (Visualización de Productos) – 22 al 24 de octubre
 Esta tarea le toco a Ana Zelaya, donde configuró la página principal (index) para mostrar automáticamente los productos registrados en la base de datos. Conectó el frontend al backend y diseñó las tarjetas de producto que despliegan nombre, imagen, precio y disponibilidad. Validó que solo los productos activos se mostraran al cliente.
 
-2.1.3. Configurar módulo de registro de usuarios (registro de usuarios) – 22 al 25 de octubre
+5.1.3. Configurar módulo de registro de usuarios (registro de usuarios) – 22 al 25 de octubre
 Héctor Palacios conectó el formulario de registro a la base de datos, implementando la asignación automática del rol “Cliente” en la tabla roles_usuarios. El proceso se probó con distintos escenarios para garantizar que la inserción y validación funcionaran correctamente.
 
-3. Sprint 6 - Scrum Master: Francisco Fernández
+6. Sprint 6 - Scrum Master: Francisco Fernández
 El objetivo de este sprint es continuar con el desarrollo y avance de los módulos principales del sistema ElectroHonduras, consolidando la estructura administrativa y funcional del proyecto. Durante esta etapa, el equipo está enfocado en la implementación de los módulos de Gestión de Productos, Gestión de Usuarios y Carretilla de Compras, además de preparar la estructura base para los módulos informativos de Contacto, Acerca de Nosotros y Preguntas Frecuentes (FAQ). 
 
-3.1. Desarrollo de tareas del Sprint 6
+6.1. Desarrollo de tareas del Sprint 6
 
-3.1.1. Módulo de Gestión de Productos (Administrador) – 27 al 29 de octubre
+6.1.1. Módulo de Gestión de Productos (Administrador) – 27 al 29 de octubre
 Guillermo Ortega completó el módulo de gestión de productos, que permite a los administradores agregar, editar y eliminar productos del sistema. Este módulo se integró con la base de datos y se sincronizó con la visualización en el catálogo principal. También se validaron los campos requeridos para garantizar la integridad de la información.
 
-3.1.2. Módulo de Gestión de Usuarios (Administrador) – 27 al 29 de octubre
+6.1.2. Módulo de Gestión de Usuarios (Administrador) – 27 al 29 de octubre
 Héctor Palacios desarrolló el módulo de gestión de usuarios, que permite visualizar, editar y actualizar información de los usuarios registrados, así como administrar sus roles y estados. El módulo se diseñó para integrarse con el panel administrativo, mostrando una tabla con los datos básicos de los usuarios y permitiendo acciones rápidas de edición o desactivación.
 
-3.1.3 Módulo de Contacto – 30 de octubre al 1 de noviembre
+6.1.3 Módulo de Contacto (30 de octubre al 1 de noviembre)
 Klardy Cruz desarrolló el módulo de contacto, permitiendo que los usuarios puedan enviar consultas o mensajes a la tienda de forma sencilla. Incluyó validaciones para asegurar que todos los campos fueran obligatorios y que el número de teléfono ingresado fuera hondureño, fortaleciendo la confiabilidad del formulario.
 
-3.1.4 Módulo de Preguntas Frecuentes (FAQ) – 30 de octubre al 1 de noviembre
+6.1.4 Módulo de Preguntas Frecuentes (FAQ) – 30 de octubre al 1 de noviembre
 Klardy Cruz también diseñó la sección de preguntas frecuentes, donde los usuarios pueden encontrar respuestas rápidas a las dudas más comunes. Se crearon las vistas, preguntas iniciales, validaciones de accesibilidad y pruebas de funcionamiento en distintos dispositivos.
 
-3.1.5. Módulo de Carretilla de Compras – 27 al 31 de octubre
+6.1.5. Módulo de Carretilla de Compras (27 al 31 de octubre)
 Francisco Fernández fue responsable del desarrollo del módulo de carretilla de compras, el cual permite a los clientes agregar, eliminar o modificar productos antes de confirmar su pedido.
 Este módulo incluye botones dinámicos para aumentar o disminuir cantidades, el cálculo automático del subtotal y total según los productos seleccionados, y la validación para que el carrito mantenga los artículos almacenados hasta el proceso de compra.
 También se añadió un ícono interactivo en la página principal que refleja en tiempo real los productos agregados, mejorando la experiencia del usuario durante el proceso de compra.
 
-3.1.6. Módulo de Acerca de Nosotros – 30 de octubre al 1 de noviembre
+6.1.6. Módulo de Acerca de Nosotros  (30 de octubre al 1 de noviembre)
 Ana Zelaya desarrolló el módulo informativo Acerca de Nosotros, el cual presenta la historia, misión, visión y valores de la tienda, con el objetivo de fortalecer la identidad institucional del negocio y generar confianza en los clientes.
 Se diseñó una interfaz visual agradable que facilita la lectura del contenido, validando su accesibilidad desde el menú principal y revisando el formato general para garantizar coherencia visual con el resto del sistema.
 
-4. Sprint 7 - Scrum Master: Guillermo Ortega
+7. Sprint 7 - Scrum Master: Guillermo Ortega
 Durante este sprint, el equipo centró sus esfuerzos en implementar la parte final del flujo de compra del sistema ElectroHonduras, garantizando que los clientes pudieran completar sus pedidos, consultar su historial y realizar pagos en línea de manera segura. Además, se trabajó en la integración del sistema con PayPal Sandbox y en la configuración de los accesos por roles, consolidando la etapa más importante del proyecto.
 
-4.1. Desarrollo de tareas del Sprint 7
+7.1. Desarrollo de tareas del Sprint 7
 
-4.1.1. Configurar accesos según roles de usuario (3 al 4 de noviembre)
+7.1.1. Configurar accesos según roles de usuario (3 al 4 de noviembre)
 Héctor Palacios desarrolló la funcionalidad de control de accesos dentro del sistema, asegurando que cada usuario solo pudiera ingresar a las pantallas correspondientes a su rol (cliente, administrador o encargado de inventario). Se validó la sesión al iniciar, se establecieron redirecciones automáticas según el tipo de usuario y se restringió el acceso a secciones administrativas para usuarios no autorizados.
 
-4.1.2. Configurar cuenta PayPal Sandbox e integración con el sistema (3 al 5 de noviembre)
+7.1.2. Configurar cuenta PayPal Sandbox e integración con el sistema (3 al 5 de noviembre)
 Francisco Fernández creó y configuró la cuenta de PayPal Sandbox, generando las credenciales API necesarias para conectar la tienda con la pasarela de pagos. Posteriormente, se realizaron pruebas exitosas de compra y validación de transacciones, garantizando que el sistema respondiera correctamente ante operaciones aprobadas o rechazadas.
 
-4.1.3. Crear módulo de Checkout (3 al 5 de noviembre)
+7.1.3. Crear módulo de Checkout (3 al 5 de noviembre)
 Francisco Fernández desarrolló el módulo de checkout, permitiendo que los clientes revisaran su pedido, visualizaran el total a pagar y completaran el proceso de compra de forma rápida y segura. Se implementó el cálculo automático de subtotal, impuestos y total, además de integrar el botón de pago de PayPal Sandbox y registrar las confirmaciones en la base de datos.
 
-4.1.4. Crear módulo de Historial de Compras (3 al 5 de noviembre)
+7.1.4. Crear módulo de Historial de Compras (3 al 5 de noviembre)
 Héctor Palacios diseñó el módulo que permite a los usuarios registrados visualizar sus pedidos anteriores, mostrando información como número de orden, fecha, estado y monto total. También se añadieron opciones para filtrar o buscar pedidos específicos y se validó que únicamente se mostraran las compras del usuario autenticado.
 
-4.1.5. Crear pantalla de Factura (6 al 7 de noviembre)
+7.1.5. Crear pantalla de Factura (6 al 7 de noviembre)
 Héctor Palacios desarrolló la pantalla de factura, donde se muestran los datos detallados de cada compra realizada. La vista incluye el número de orden, nombre del cliente, correo, fecha, comisión, monto neto y total. Además, se añadió la opción para imprimir o descargar la factura en formato PDF, verificando la correcta correspondencia con el pedido confirmado y la compatibilidad del formato en diferentes navegadores.
 
-4.1.6 Actualizaciones para mejorar el proyecto.
-
+7.1.6 Actualizaciones para mejorar el proyecto (10 de noviembre)
 Tras la culminación del Sprint 7, se realizaron mejoras funcionales y pequeños ajustes dentro de los módulos ya desarrollados. Las mejoras son las siguientes:
+Mejoras en el módulo de usuarios: Héctor Palacios agregó el campo de rol y nuevas funciones para la gestión interactiva de usuarios, además de corregirse el proceso que permite al administrador eliminar registros.
+Actualización en el registro de clientes: Francisco Fernández se habilitó la captura de nombre y apellido con validaciones adicionales para garantizar la integridad de los datos.
+Ampliación del historial de compras: Francisco Fernández se incorporó el campo de productos en el detalle de cada orden, incluyendo una tabla resumen con los artículos adquiridos por el cliente.
 
-- Mejoras en el módulo de usuarios: se agregó el campo de rol y nuevas funciones para la gestión interactiva de usuarios, además de corregirse el proceso que permite al administrador eliminar registros.
-
-- Actualización en el registro de clientes: se habilitó la captura de nombre y apellido con validaciones adicionales para garantizar la integridad de los datos.
-
-- Ampliación del historial de compras: se incorporó el campo de productos en el detalle de cada orden, incluyendo una tabla resumen con los artículos adquiridos por el cliente.
-
-5. Sprint 8 - Scrum Master: Ana Zelaya
-
+8. Sprint 8 - Scrum Master: Ana Zelaya
 Durante este sprint se realizaron los ajustes finales del sistema ElectroHonduras antes de su despliegue oficial. El objetivo principal fue optimizar los módulos ya implementados, mejorar la experiencia visual en diferentes dispositivos, corregir mensajes de validación y asegurar el funcionamiento estable del sistema en ambiente web. Además, se efectuó el proceso completo de publicación en el hosting InfinityFree, preparando el proyecto para su uso y su presentación final.
 
-5.1. Desarrollo de tareas del Sprint 8
+8.1. Desarrollo de tareas del Sprint 8
 
-5.1.1. Mejoras finales del sistema (17 al 18 de noviembre)
+8.1.1. Mejoras finales del sistema (17 al 18 de noviembre)
 Héctor Palacios fue el encargado de aplicar los últimos ajustes en todos los módulos del sistema. Se revisaron las pantallas principales, se ajustó el diseño responsive para dispositivos móviles y tablet, y se reemplazaron mensajes de error técnicos por mensajes claros y controlados. También se agregaron validaciones para campos requeridos y formatos específicos, además de realizar pruebas con datos inválidos para confirmar que los mensajes se mostraran correctamente. Estas mejoras garantizan una experiencia más profesional, estable y entendible para el usuario final.
 
-5.1.2. Subir el sistema al hosting InfinityFree (18 al 22 de noviembre)
+8.1.2. Subir el sistema al hosting InfinityFree (18 al 22 de noviembre)
 Francisco Fernández llevó a cabo el despliegue completo del sistema en el hosting InfinityFree. Esto incluyó la creación del panel de control, configuración de la base de datos remota, subida de archivos mediante FTP y actualización de credenciales y rutas internas del proyecto. Finalmente, se probó el funcionamiento general en el entorno web, verificando que todas las funciones operaran de forma correcta y que el acceso público fuera estable desde cualquier dispositivo, con esto, el sistema quedó oficialmente disponible en línea.
 
-6. Sprint 9 – Scrum Master: Klardy Cruz
-
+9. Sprint 9 – Scrum Master: Klardy Cruz
 Durante este sprint se realizaron todas las pruebas finales del sistema, con el propósito de asegurar que cada módulo funcionara correctamente tanto de forma individual como en conjunto. Además, se verificó que el flujo completo de compra, registro, carretilla, checkout y administración operara sin errores, garantizando que el sistema estuviera completamente estable y listo para su entrega final.
 
-6.1. Desarrollo de tareas del Sprint 9
+9.1. Desarrollo de tareas del Sprint 9
 
-6.1.1. Pruebas funcionales del sistema (24 al 26 de noviembre)
+9.1.1. Pruebas funcionales del sistema (24 al 26 de noviembre)
 Guillermo Ortega ejecutó las pruebas funcionales de todos los módulos del sistema, verificando que operaciones esenciales como crear, editar, eliminar, consultar, filtrar y navegar funcionaran correctamente. Se evaluó el comportamiento de los botones y formularios, la validación de búsquedas, la paginación y la navegación general del sistema. Finalmente, se documentaron los resultados con capturas como evidencia de cada caso probado.
 
-6.1.2. Pruebas de integración general (26 al 28 de noviembre)
-En esta fase nuevamente Guillermo Ortega se encargo de evaluar que todos los módulos trabajaran correctamente entre sí, ejecutando flujos completos desde el registro y login hasta la compra, movimiento del carrito, historial y administración. Se verificó que la interacción entre roles, permisos y funcionalidades fuera coherente y fluida, sin romper la lógica del sistema. Los resultados fueron registrados en un documento PDF con cada prueba evidenciada.
+9.1.2. Pruebas de integración general (26 al 28 de noviembre)
+En esta fase nuevamente Guillermo Ortega se encargó de evaluar que todos los módulos trabajaran correctamente entre sí, ejecutando flujos completos desde el registro y login hasta la compra, movimiento del carrito, historial y administración. Se verificó que la interacción entre roles, permisos y funcionalidades fuera coherente y fluida, sin romper la lógica del sistema. Los resultados fueron registrados en un documento PDF con cada prueba evidenciada.
 
-6.1.3. Pruebas de validación de entradas (28 al 29 de noviembre)
+9.1.3. Pruebas de validación de entradas (28 al 29 de noviembre)
 Héctor Palacios validó el manejo adecuado de errores del sistema, comprobando que los mensajes de validación aparecieran de forma clara ante entradas inválidas como campos vacíos, formatos incorrectos, valores negativos, correos mal formados o inicios de sesión incorrectos. Se verificó que el sistema rechazara correctamente los datos incorrectos y mantuviera un comportamiento seguro y controlado. Todas las pruebas fueron documentadas con capturas de pantalla.
 
-6.1.4. Observaciones detectadas y correcciones aplicadas (30 de noviembre)
-Durante las pruebas de validación de entradas realizadas el 29 de noviembre de 2025, Alejandro Palacios identificó varios errores importantes que persistían en el sistema. Entre las incidencias reportadas se encontraba que el módulo de Contáctanos permitía ingresar nombres y apellidos con números, además de aceptar correos electrónicos en formatos inválidos sin generar advertencias. Asimismo, se detectó un fallo crítico dentro del módulo de Gestión de Usuarios, donde un administrador tenía la posibilidad de modificar su propio estado (activo/inactivo), situación que podía ocasionar la pérdida de acceso al sistema y afectar la operatividad administrativa.
+9.1.4. Observaciones detectadas y correcciones aplicadas (30 de noviembre)
+Durante las pruebas de validación de entradas realizadas el 29 de noviembre de 2025, Héctor Palacios identificó varios errores importantes que persistían en el sistema. Entre las incidencias reportadas se encontraba que el módulo de Contáctanos permitía ingresar nombres y apellidos con números, además de aceptar correos electrónicos en formatos inválidos sin generar advertencias. Asimismo, se detectó un fallo crítico dentro del módulo de Gestión de Usuarios, donde un administrador tenía la posibilidad de modificar su propio estado (activo/inactivo), situación que podía ocasionar la pérdida de acceso al sistema y afectar la operatividad administrativa.
 El 30 de noviembre de 2025 se llevaron a cabo las correcciones correspondientes, esto lo hizo Francisco Fernández. Donde reforzó las validaciones del formulario de Contáctanos, asegurando que los campos de nombre y apellido solo aceptaran caracteres permitidos, que el formato del correo fuera estrictamente correcto y que los mensajes de error fueran claros y visibles para el usuario. En cuanto al módulo de Gestión de Usuarios, se bloqueó el campo Estado cuando un administrador edita su propia cuenta, impidiendo que pueda desactivarse accidentalmente. Todas estas correcciones fueron implementadas tanto en el repositorio de GitHub como en la versión desplegada en InfinityFree, verificando su funcionamiento mediante nuevas pruebas.
+
+10. Sprint 10 – Scrum Master: Francisco Fernández
+El Sprint 10 estuvo dedicado a la preparación de la documentación final del proyecto ElectroHonduras. En esta fase se buscó dejar listos el manual técnico, el manual de usuario y la bitácora técnica definitiva, unificando toda la información generada durante el ciclo de desarrollo. El propósito principal fue asegurar que toda la documentación explicara de manera clara cómo funciona el sistema, cómo fue construido y cómo se utiliza, proporcionando material formal y completo para la entrega y presentación final del proyecto.
+10.1. Desarrollo de tareas del Sprint 10
+
+10.1.1. Manual técnico (1 al 6 de diciembre)
+Ana Zelaya y Klardy Cruz se enfocaron en completar el manual técnico del sistema, reuniendo y organizando toda la información necesaria para explicar de manera clara cómo está construido ElectroHonduras. Dentro del proceso se documentó la arquitectura general del proyecto, las tecnologías empleadas, la lógica de funcionamiento de cada módulo y los diagramas actualizados generados en fases anteriores. También se detallaron los requisitos de instalación y la forma correcta de configurar el entorno. El resultado fue un documento profesional que sirve como guía para cualquier desarrollador que necesite comprender, dar mantenimiento o continuar el proyecto en el futuro.
+
+10.1.2. Manual de usuario (1 al 6 de diciembre)
+Ana Zelaya y Klardy Cruz desarrollaron el manual de usuario, con el objetivo de crear una guía clara y sencilla para que cualquier persona pudiera utilizar el sistema sin tener conocimientos técnicos. En este documento se explicó paso a paso cómo navegar por la plataforma, crear una cuenta, iniciar sesión, realizar compras, revisar el historial, utilizar el carrito. Además, se describió el funcionamiento de cada módulo con capturas reales del sistema. El manual quedó estructurado de forma visual, práctica y fácil de seguir para los usuarios finales.
+
+10.1.3. Bitácora técnica final (1 al 6 de diciembre)
+Francisco Fernández realizó la consolidación de toda la historia del proyecto en un único documento técnico. En esta bitácora se integraron las actividades realizadas en cada sprint, los problemas detectados, las correcciones aplicadas y los avances logrados desde el inicio del desarrollo. La organización de este documento permitió mostrar de forma clara la evolución del sistema, el trabajo coordinado del equipo y la coherencia en el seguimiento del ciclo de vida del software.
