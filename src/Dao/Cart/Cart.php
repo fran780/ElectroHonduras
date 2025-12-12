@@ -43,6 +43,13 @@ class Cart extends \Dao\Table
                 $productosCurados[$producto["productId"]]["productStock"] -= $producto["reserved"];
             }
         }
+
+        foreach ($productosCurados as $productId => $producto) {
+            if (!isset($producto["productStock"]) || $producto["productStock"] <= 0) {
+                unset($productosCurados[$productId]);
+            }
+        }
+        
         $productosDisponibles = null;
         $prodsCarretillaAutorizada = null;
         $prodsCarretillaNAutorizada = null;
